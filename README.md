@@ -1,8 +1,7 @@
 # MyGameList
 
 ## Descrição
-É uma idealização dos alunos Agnes @, Eyder @eydertinoco, Gabriel @GALMelo e Mikhael @BlueJayGM para a matérias Projeto Integrador, ministrado pelo professor 
-Leonador Fernandes.
+É uma idealização dos alunos Agnes @xyagnesxy, Eyder @eydertinoco, Gabriel @GALMelo e Mikhael @BlueJayGM para a matérias Projeto Integrador, ministrado pelo professor Leonador Fernandes.
 
 A ideia inicial é criar um ambiente de análises e pontuação, onde usuários podem interagir em tópicos que representam um jogo.
 
