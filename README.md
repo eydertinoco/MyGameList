@@ -8,10 +8,10 @@ A ideia inicial é criar um ambiente de análises e pontuação, onde usuários 
 ## Biblioteca Utilizada
 ### Bulma
 https://bulma.io/
-npm install bulma
+```npm install bulma```
 ### Axios
 Axios é uma biblioteca JavaScript, um cliente HTTP utilizado para fazer requisições.
-npm install axios
+```npm install axios```
 
 
 ## Informações gerais
