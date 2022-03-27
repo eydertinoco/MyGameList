@@ -1,8 +1,6 @@
 <template>
   <div class="navbar" id="navbar">
     <router-link to="/">Home</router-link>
-    <router-link to="/informacao">Informação</router-link>
-    <router-link to="/contato">Contato</router-link>
     <router-link to="/login">Acesso Restrito</router-link>
     <a href="javascript:void(0);" class="icon" @click="myFunction()">
       <i class="fa fa-bars"></i>

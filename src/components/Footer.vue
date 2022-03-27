@@ -1,26 +1,6 @@
 <template>
-  <div align="center" class="footer">
-    <div class="footer__info">
-      <a class="info info__t2" href="http://www.freepik.com">Arte: Designed by stories / Freepik</a>
-    </div>
-    <div class="footer__info">
-      <p>Redes Sociais</p>
-      <div>
-        <a href="https://www.linkedin.com/in/eyder-tinoco-ferreira-neto-91337a155/" target="blank">
-          <FontAwesome :icon="['fab', 'linkedin']" class="redeSocial__icon"/>
-        </a>
-        <a href="https://wa.me/5582999221574" target="blank"
-           class="footer__redeSocial__icon">
-          <FontAwesome :icon="['fab', 'whatsapp']" class="redeSocial__icon"/>
-        </a>
-      </div>
-    </div>
-  </div>
   <div class="copyright">
-    <button class="btnTop">
-      <FontAwesome icon="fa-arrow-up" />
-    </button>
-    <p>© 2022, Eyder Tinoco</p>
+    <p>© 2022, MyGameList</p>
   </div>
 </template>
 
