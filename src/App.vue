@@ -1,6 +1,8 @@
 <template>
   <Header/>
-  <router-view/>
+  <div class="body">
+    <router-view/>
+  </div>
   <Footer/>
 </template>
 
@@ -37,7 +39,7 @@ html, body {
     min-height: calc(100vh - 228px);
   }
   @include for-desktop-only() {
-    min-height: calc(100vh - 208px);;
+    min-height: calc(100vh - 114px);;
   }
 }
 
