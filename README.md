@@ -5,6 +5,8 @@
 
 A ideia inicial é criar um ambiente de análises e pontuação, onde usuários podem interagir em tópicos que representam um jogo.
 
+
+
 ## Informações gerais
 Time de 4-5 alunos;
 

@@ -1,0 +1,22 @@
+$azulCinza: #698EBF;
+$azulClaro: #4178BF;
+$cinza: #868EA6;
+$branco: #D9C4B8;
+$preto: #0D0D0D;
+$transparente: none;
+
+@mixin for-phone-only {
+  @media (max-width: 640.98px) { @content; }
+}
+@mixin for-tablet-only {
+  @media (min-width: 641px) and (max-width: 1024.98px) { @content; }
+}
+@mixin for-desktop-only {
+  @media (min-width: 1025px) and (max-width: 1920.98px) { @content; }
+}
+@mixin for-2k-only {
+  @media (min-width: 1921px) and (max-width: 2880.98px) { @content; }
+}
+@mixin for-4k-only {
+  @media (min-width: 2881px) { @content; }
+}
