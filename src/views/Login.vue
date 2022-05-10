@@ -1,24 +1,28 @@
 <template>
   <div class="body">
-    <div class="card">
-      <form action="" @submit="acessarConta($event)">
+    <form action="" @submit="acessarConta($event)">
 
-        <div class="card__field">
-          <label>Username: </label>
-          <input type="text" v-model="username" required="true"/>
-        </div>
+      <h1>Acessar Conta</h1>
 
-        <div class="card__field">
-          <label>Senha: </label>
-          <input type="password" v-model="password" required="true"/>
-        </div>
+      <div class="card__field">
+        <label>Conta: </label>
+        <input type="text" v-model="username" required="true"/>
+      </div>
 
-        <div class="card__submit">
-          <button class="card__submit__btn">Acessar Conta</button>
-        </div>
+      <div class="card__field">
+        <label>Senha: </label>
+        <input type="password" v-model="password" required="true"/>
+      </div>
 
-      </form>
-    </div>
+      <router-link to="/login">Esqueci a senha</router-link>
+
+      <div class="card__submit">
+        <button class="card__submit__btn">Acessar Conta</button>
+      </div>
+
+      <router-link to="/login">Criar conta</router-link>
+
+    </form>
   </div>
 </template>
 
@@ -62,7 +66,7 @@ export default {
 
   .card {
     align-items: center;
-    border: 1px solid $azulCinza;
+    border: 1px solid $azulEscuro;
     border-radius: 5px;
     background: $branco;
     justify-content: center;
@@ -105,7 +109,7 @@ export default {
       flex-direction: column;
       margin: 25px 30px;
       &__btn {
-        background: $cinza;
+        background: $verde;
         border: 0px;
         border-radius: 10px;
         color: $branco;
@@ -122,7 +126,7 @@ export default {
           width: 190px;
         }
         &:hover {
-          background: $azulCinza;
+          background: $azulEscuro;
         }
       }
     }

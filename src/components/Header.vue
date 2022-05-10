@@ -1,15 +1,22 @@
 <template>
-  <div id="topbar">
-    <Navbar/>
+  <div class="header">
+    <img src="../../public/img/MyGameList.png" alt="MyGameList" class="header__logo"/>
+    <div class="header__menu">
+      <router-link to="/">Reviews</router-link>
+      <router-link to="/login">About Us</router-link>
+      <router-link to="/login">News</router-link>
+    </div>
+    <div class="header__login">
+      <button class="header__login__login">Log In</button>
+      <button class="header__login__singin">Sing In</button>
+    </div>
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Header",
-  components: {Navbar},
   data() {
     return {
       username: '',
@@ -38,100 +45,50 @@ export default {
 <style scoped lang="scss">
 @import './../assets/style/mixins';
 
-.menu {
-  position: relative;
-  &__text {
-    color: $branco;
-    font-size: 12px;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: uppercase;
-    &:hover {
-      color: $branco;
-      text-decoration: none;
+.header {
+  border-bottom: 1px solid $preto;
+  display: flex;
+  height: 80px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  &__logo {
+    width: 300px;
+  }
+  &__menu {
+    & a {
+      color: $preto;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 10px;
+      transition: 0.5s;
+      &:hover {
+        color: $verde;
+      }
+      &:focus {
+        color: $verde;
+      }
+      &:active {
+        color: $verde;
+      }
     }
   }
-  &__top {
-    background-color: #036BAC;
-    z-index: 200;
-    @include for-phone-only() {
-      height: 35px;
-      text-align: center;
-      top: -12px;
+  &__login {
+    &__login {
+      background: $azulEscuro;
     }
-    @include for-tablet-only() {
-      height: 70px;
-      text-align: center;
-      top: -12px;
+    &__singin {
+      background: $verde;
     }
-    @include for-desktop-only() {
-      border-radius: 0px 0px 0px 25px;
-      height: 120px;
-      right: 0px;
-      top: 0px;
-      position: absolute;
-      width: 400px;
-    }
-    &__title {
-      @include for-phone-only() {
-        position: relative;
-        top: 10px;
-      }
-      @include for-tablet-only() {
-        position: relative;
-        top: 16px;
-      }
-      @include for-desktop-only() {
-        left: 150px;
-        top: 15px;
-        position: absolute;
-      }
-    }
-    &__submenu {
-      position: absolute;
-      top: 15px;
-      display: inline-flex;
-      @include for-phone-only() {
-        visibility: hidden;
-        width: 100%;
-        left: 0px;
-      }
-      @include for-tablet-only() {
-        position: relative;
-        top: 0px;
-      }
-      @include for-desktop-only() {
-        left: 45%;
-      }
-      &__options {
-        margin: 0px 20px 0px 0px;
-        display: inline-block;
-      }
-    }
-    &__redeSocial {
-      @include for-phone-only() {
-        position: absolute;
-        left: 0px;
-        visibility: hidden;
-      }
-      @include for-tablet-only() {
-        position: absolute;
-        left: 0px;
-        visibility: hidden;
-      }
-      @include for-desktop-only() {
-        right: 30px;
-        top: 20px;
-        position: absolute;
-        visibility: visible;
-      }
-      &__link {
-        text-decoration: none;
-      }
-      &__img {
-        width: 40px;
-        margin: 0px 2px;
-      }
+    & button {
+      border: none;
+      border-radius: 10px;
+      color: $branco;
+      font-size: 1.3rem;
+      font-weight: 700;
+      height: 40px;
+      margin: 0 5px;
+      width: 100px;
     }
   }
 }

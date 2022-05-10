@@ -1,89 +1,26 @@
 <template>
-  <div>
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Text input">
+  <div class="home">
+    <div class="home__intro">
+      <img src="../../public/img/Controle.png" alt="Controle" class="home__intro__img">
+      <div class="home__intro__text">
+        <h2>Encontre os jogos mais jogados e apoie seu jogo favorito.</h2>
+        <p>Achou algo novo? Crie um tópico sobre isso! Faça com que outros jogadores vivam o mesmo.</p>
+      </div>
+    </div>
+    <div class="home__bestGame">
+
+    </div>
+    <div class="home__games">
+      <h2>Seja o primeiro a avaliar</h2>
+      <div class="home__games__avaliar">
+
+      </div>
+      <h2>Todos os jogos</h2>
+      <div class="home__games__all">
+
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">Username</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-        <span class="icon is-small is-left">
-      <i class="fas fa-user"></i>
-    </span>
-        <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-      </div>
-      <p class="help is-success">This username is available</p>
-    </div>
-
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-        <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-        <span class="icon is-small is-right">
-      <i class="fas fa-exclamation-triangle"></i>
-    </span>
-      </div>
-      <p class="help is-danger">This email is invalid</p>
-    </div>
-
-    <div class="field">
-      <label class="label">Subject</label>
-      <div class="control">
-        <div class="select">
-          <select>
-            <option>Select dropdown</option>
-            <option>With options</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Message</label>
-      <div class="control">
-        <textarea class="textarea" placeholder="Textarea"></textarea>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <label class="checkbox">
-          <input type="checkbox">
-          I agree to the <a href="#">terms and conditions</a>
-        </label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <label class="radio">
-          <input type="radio" name="question">
-          Yes
-        </label>
-        <label class="radio">
-          <input type="radio" name="question">
-          No
-        </label>
-      </div>
-    </div>
-
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-link">Submit</button>
-      </div>
-      <div class="control">
-        <button class="button is-link is-light">Cancel</button>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -101,9 +38,50 @@ export default {
 
 <style scoped lang="scss">
 @import './../assets/style/mixins';
-@import "bulma/sass/utilities/_all.sass";
-@import "bulma/sass/grid/columns.sass";
-@import "bulma/sass/elements/button.sass"
+
+.home {
+  &__intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin: 40px 0;
+    &__img {
+      margin: 9vw;
+      width: 350px;
+    }
+    &__text {
+      padding: 5vw;
+      & h2 {
+        font-weight: 700;
+        font-size: 40px;
+      }
+      & p {
+        font-size: 24px;
+      }
+    }
+  }
+  &__bestGame {
+    background-image: url("../../public/img/fundoEstiloEdit.png");
+    background-color: $azulClaro;
+    background-repeat-x: initial;
+    background-repeat-y: no-repeat;
+    background-position-y: top;
+    background-position-x: left;
+    height: 100vh;
+    margin-top: -130px;
+    padding: 50px 0;
+  }
+  &__games {
+    background: $azulEscuro;
+    padding: 40px 60px;
+    & h2 {
+      color: $branco;
+      font-weight: 600;
+      font-size: 36px;
+    }
+  }
+}
 
 
 

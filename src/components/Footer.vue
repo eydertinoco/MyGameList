@@ -1,6 +1,21 @@
 <template>
-  <div class="copyright">
-    <p>© 2022, MyGameList</p>
+  <div class="footer">
+    <img src="../../public/img/MyGameList.png" alt="MyGameList" class="footer__logo"/>
+    <div class="footer__social">
+      <a href="https://pt-br.facebook.com/">
+        <img src="../../public/img/social/facebook.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/">
+        <img src="../../public/img/social/instagram.png" alt="Instagram">
+      </a>
+      <a href="https://twitter.com">
+        <img src="../../public/img/social/twitter.png" alt="Twitter">
+      </a>
+      <a href="https://www.youtube.com/">
+        <img src="../../public/img/social/youT.png" alt="Youtube">
+      </a>
+    </div>
+    <p class="footer__copyright">© 2022 MyGameList All rights reserved</p>
   </div>
 </template>
 
@@ -16,67 +31,26 @@ export default {
 
 .footer {
   background-color: $azulClaro;
-  bottom: 0px;
-  text-transform: uppercase;
-  position: relative;
   display: flex;
-  flex-direction: row;
-  height: 200px;
-  width: 100%;
-  &__info {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    @include for-phone-only() {
-      height: 140px;
-    }
-    @include for-tablet-only() {
-      height: 100px;
-    }
-    & .info {
-      color: $branco;
-      margin: 5px 0;
-      &__t1 {
-        font-weight: bold;
-      }
-      &__t2 {
-      }
-    }
-    & .redeSocial {
-      &__link {
-        text-decoration: none;
-      }
-      &__icon {
-        color: $branco;
-        margin: 0 5px;
-        height: 40px;
-        width: 40px;
-      }
-    }
-  }
-}
-
-.copyright {
-  background: $preto;
-  color: $branco;
-  height: 60px;
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  position: relative;
   justify-content: center;
-  font-size: 14px;
-  & .btnTop {
-    width: 80px;
-    height: 80px;
-    border-radius: 80px;
-    border: 3px solid $preto;
-    background: $cinza;
-    color: $preto;
-    position: absolute;
-    bottom: 45px;
-    right: 10px;
-    z-index: 900;
+  &__logo {
+    margin: 30px 0px 20px;
+    width: 300px;
+  }
+  &__social {
+    margin: 10px 0;
+    & a {
+      & img {
+        margin: 5px;
+        width: 35px;
+      }
+    }
+  }
+  &__copyright {
+    color: $branco;
+    font-weight: 600;
   }
 }
-
 </style>
