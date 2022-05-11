@@ -3,12 +3,12 @@
     <img src="../../public/img/MyGameList.png" alt="MyGameList" class="header__logo"/>
     <div class="header__menu">
       <router-link to="/">Reviews</router-link>
-      <router-link to="/login">About Us</router-link>
-      <router-link to="/login">News</router-link>
+      <router-link to="/">About Us</router-link>
+      <router-link to="/">News</router-link>
     </div>
     <div class="header__login">
-      <button class="header__login__login">Log In</button>
-      <button class="header__login__singin">Sing In</button>
+      <router-link to="/login" class="header__login__login">Log In</router-link>
+      <router-link to="/cadastrar" class="header__login__singin">Sing In</router-link>
     </div>
   </div>
 </template>
@@ -76,11 +76,13 @@ export default {
   &__login {
     &__login {
       background: $azulEscuro;
+      padding: 10px 15px;
     }
     &__singin {
       background: $verde;
+      padding: 10px 10px;
     }
-    & button {
+    & a {
       border: none;
       border-radius: 10px;
       color: $branco;

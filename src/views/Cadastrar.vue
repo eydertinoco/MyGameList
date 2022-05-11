@@ -2,29 +2,33 @@
   <div class="body">
     <form action="" @submit="acessarConta($event)">
 
-      <h1>Acessar Conta</h1>
+      <h1>Crie sua Conta</h1>
 
-      <div class="card">
-
-        <div class="card__field">
-          <label>Conta: </label>
-          <input type="text" v-model="username" required="true"/>
-        </div>
-
-        <div class="card__field">
-          <label>Senha: </label>
-          <input type="password" v-model="password" required="true"/>
-        </div>
-
-        <router-link to="/login">Esqueci a senha</router-link>
-
-        <div class="card__submit">
-          <button class="card__submit__btn">Acessar Conta</button>
-        </div>
-
-        <router-link to="/login">Criar conta</router-link>
-
+      <div class="card__field">
+        <label>Conta: </label>
+        <input type="text" v-model="username" required="true"/>
       </div>
+
+      <div class="card__field">
+        <label>Email: </label>
+        <input type="text" v-model="email" required="true"/>
+      </div>
+
+      <div class="card__field">
+        <label>Senha: </label>
+        <input type="password" v-model="password" required="true"/>
+      </div>
+
+      <div class="card__field">
+        <label>Confirmar Senha: </label>
+        <input type="password" v-model="passwordConfirm" required="true"/>
+      </div>
+
+      <div class="card__submit">
+        <button class="card__submit__btn">Acessar</button>
+      </div>
+
+      <router-link to="/login">Login</router-link>
 
     </form>
   </div>
@@ -37,7 +41,9 @@ export default {
   data() {
     return {
       username: '',
+      email: '',
       password: '',
+      passwordConfirm: '',
     }
   },
   methods: {
@@ -62,37 +68,49 @@ export default {
 <style scoped lang="scss">
 @import './../assets/style/mixins.scss';
 
-  h1 {
-    color: $preto;
-    font-weight: 700;
-    font-size: 2rem;
-    text-align: center;
-    margin: 30px 0;
+  .body {
+    align-items: center;
+    background-size: cover;
+    position: relative;
   }
 
   .card {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
+    align-items: center;
+    border: 1px solid $azulEscuro;
+    border-radius: 5px;
+    background: $branco;
+    justify-content: center;
+    position: absolute;
+    @include for-phone-only() {
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+    @include for-tablet-only() {
+      top: calc(50% - 105px);
+      left: calc(50% - 200px);
+      height: 235px;
+      width: 400px;
+    }
+    @include for-desktop-only() {
+      top: calc(50% - 105px);
+      left: calc(50% - 200px);
+      height: 235px;
+      width: 400px;
+    }
     &__field {
       display: flex;
       flex-direction: column;
       margin: 15px 30px;
       & label {
-        color: #00000050;
-        font-size: 32px;
         font-weight: bold;
         margin-bottom: 5px;
       }
       & input {
+        height: 30px;
         padding-left: 5px;
         width: 100%;
-        background: #C4C4C426;
-        height: 50px;
-        font-size: 28px;
-        border: 1px solid #C4C4C470;
-        border-radius: 10px;
       }
     }
     &__submit {
