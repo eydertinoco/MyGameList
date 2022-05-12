@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form action="" @submit="acessarConta($event)">
+    <form action="" @submit="acessarConta($event)" class="form_reset">
 
       <h1>Restaurar Senha</h1>
 
@@ -37,6 +37,13 @@ export default {
 <style scoped lang="scss">
 @import './../assets/style/mixins.scss';
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+.form_reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 h1 {
   color: $preto;

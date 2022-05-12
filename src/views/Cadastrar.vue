@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <form action="" @submit="acessarConta($event)">
+    <form action="" @submit="acessarConta($event)" class="form_cadastro">
 
       <h1>Crie sua Conta</h1>
 
@@ -32,6 +32,9 @@
 
         <router-link to="/login" class="card__create">
           Login
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.172 6.778L6.808 1.414L8.222 0L16 7.778L8.222 15.556L6.808 14.142L12.172 8.778H0V6.778H12.172Z" fill="black"/>
+          </svg>
         </router-link>
 
       </div>
@@ -75,12 +78,19 @@ export default {
 @import './../assets/style/mixins.scss';
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
+.form_cadastro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 h1 {
   color: $preto;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-align: center;
-  margin: 30px 0;
+  margin: 3.2rem 0;
 }
 
 .card {
@@ -146,10 +156,25 @@ h1 {
     }
   }
   &__create {
-    color: black;
+    color: $preto;
+    font-size: 1.2rem;
+    font-weight: 600;
     display: flex;
-    font-size: 20px;
+    align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    transition: 0.3s;
+
+    svg path {
+      transition: 0.3s;
+    }
+
+    &:hover {
+      color: $azulClaro;
+      svg path {
+        fill: $azulClaro;
+      }
+    }
   }
 }
 

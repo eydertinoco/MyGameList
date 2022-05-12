@@ -7,12 +7,12 @@
       <div class="card">
 
         <div class="card__field">
-          <label>Conta</label
+          <label>Conta</label>
           <input type="text" v-model="username" required="true"/>
         </div>
 
         <div class="card__field">
-          <label>Senha </label>
+          <label>Senha</label>
           <input type="password" v-model="password" required="true"/>
         </div>
 

@@ -1,10 +1,12 @@
 <template>
-  <div></div>
+  <div>
+
+  </div>
 </template>
 
 <script>
 export default {
-  name: "GamePage",
+  name: "GameView",
   data() {
     return {
       dbGames: null
