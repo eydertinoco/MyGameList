@@ -45,7 +45,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    margin: 40px 0;
+    margin-top: 40px;
     &__img {
       margin: 9vw;
       width: 350px;
@@ -64,13 +64,9 @@ export default {
   &__bestGame {
     background-image: url("../../public/img/fundoEstiloEdit.png");
     background-color: $azulClaro;
-    background-repeat-x: initial;
-    background-repeat-y: no-repeat;
-    background-position-y: top;
-    background-position-x: left;
-    height: 100vh;
-    margin-top: -130px;
-    padding: 50px 0;
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
   &__games {
     background: $azulEscuro;

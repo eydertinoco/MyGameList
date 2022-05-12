@@ -16,6 +16,11 @@ const routes = [
         path: '/cadastrar',
         name: 'Cadastrar',
         component: () => import(/* webpackChunkName: "about" */ '../views/Cadastrar.vue')
+    },
+    {
+        path: '/resetPassword',
+        name: 'ResetPassword',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ResetPassword.vue')
     }
 ]
 
