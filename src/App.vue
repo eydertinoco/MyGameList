@@ -21,14 +21,25 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 @import './assets/style/mixins.scss';
 
 
-html, body {
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+a {
+  color: $preto;
+  text-decoration: none;
+}
+
+html, body {
+  font-family: "Rajdhani", Helvetica, Arial, sans-serif;
 }
 
 .body {
