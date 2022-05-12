@@ -7,22 +7,28 @@
       <div class="card">
 
         <div class="card__field">
-          <label>Conta: </label>
+          <label>Conta</label>
           <input type="text" v-model="username" required="true"/>
         </div>
 
         <div class="card__field">
-          <label>Senha: </label>
+          <label>Senha</label>
           <input type="password" v-model="password" required="true"/>
         </div>
 
-        <router-link to="/login">Esqueci a senha</router-link>
+        <router-link to="/resetPassword" class="card__reset">
+          Esqueci a senha
+        </router-link>
 
         <div class="card__submit">
-          <button class="card__submit__btn">Acessar Conta</button>
+          <button class="card__submit__btn">
+            Acessar
+          </button>
         </div>
 
-        <router-link to="/login">Criar conta</router-link>
+        <router-link to="/cadastrar" class="card__create">
+          Criar conta
+        </router-link>
 
       </div>
 
@@ -61,6 +67,7 @@ export default {
 
 <style scoped lang="scss">
 @import './../assets/style/mixins.scss';
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
   h1 {
     color: $preto;
@@ -74,7 +81,9 @@ export default {
     width: 600px;
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 60px auto 180px;
+    background-color: transparent;
+    box-shadow: none;
     &__field {
       display: flex;
       flex-direction: column;
@@ -95,32 +104,46 @@ export default {
         border-radius: 10px;
       }
     }
+    &__reset {
+      color: #8D8D8D;
+      display: flex;
+      font-size: 20px;
+      justify-content: flex-end;
+      margin-right: 30px;
+    }
     &__submit {
       align-items: center;
       display: flex;
       flex-direction: column;
       margin: 25px 30px;
       &__btn {
-        background: $verde;
+        background: $azulClaro;
         border: 0px;
         border-radius: 10px;
         color: $branco;
-        font-weight: bold;
-        height: 35px;
+        font-size: 24px;
+        font-weight: 600;
+        height: 50px;
         transition: 0.5s;
         @include for-phone-only() {
           width: 100%;
         }
         @include for-tablet-only() {
-          width: 190px;
+          width: 300px;
         }
         @include for-desktop-only() {
-          width: 190px;
+          width: 350px;
         }
         &:hover {
           background: $azulEscuro;
         }
       }
+    }
+    &__create {
+      color: black;
+      display: flex;
+      font-size: 20px;
+      justify-content: center;
     }
   }
 

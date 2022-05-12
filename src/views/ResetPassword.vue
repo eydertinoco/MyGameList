@@ -1,38 +1,21 @@
 <template>
-  <div class="body">
+  <div>
     <form action="" @submit="acessarConta($event)">
 
-      <h1>Crie sua Conta</h1>
+      <h1>Restaurar Senha</h1>
 
       <div class="card">
-
-        <div class="card__field">
-          <label>Conta</label>
-          <input type="text" v-model="username" required="true"/>
-        </div>
 
         <div class="card__field">
           <label>E-mail</label>
           <input type="text" v-model="email" required="true"/>
         </div>
 
-        <div class="card__field">
-          <label>Senha</label>
-          <input type="password" v-model="password" required="true"/>
-        </div>
-
-        <div class="card__field">
-          <label>Confirmar Senha</label>
-          <input type="password" v-model="passwordConfirm" required="true"/>
-        </div>
-
         <div class="card__submit">
-          <button class="card__submit__btn">Acessar</button>
+          <button class="card__submit__btn">
+            Restaurar
+          </button>
         </div>
-
-        <router-link to="/login" class="card__create">
-          Login
-        </router-link>
 
       </div>
 
@@ -42,32 +25,12 @@
 
 <script>
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Login",
+  name: "ResetPassword",
   data() {
     return {
-      username: '',
       email: '',
-      password: '',
-      passwordConfirm: '',
     }
   },
-  methods: {
-    acessarConta(e) {
-      e.preventDefault();
-      console.log('Dados do usuário preenchido:');
-
-      const username = this.username;
-      const password = this.password;
-
-      console.log(username);
-      console.log(password);
-
-      //ajax
-
-      //banco de dados
-    }
-  }
 }
 </script>
 

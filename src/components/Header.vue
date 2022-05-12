@@ -1,14 +1,20 @@
 <template>
   <div class="header">
-    <img src="../../public/img/MyGameList.png" alt="MyGameList" class="header__logo"/>
+    <router-link to="/" class="header__logo">MyGameList</router-link>
     <div class="header__menu">
       <router-link to="/">Reviews</router-link>
       <router-link to="/">About Us</router-link>
       <router-link to="/">News</router-link>
     </div>
     <div class="header__login">
-      <router-link to="/login" class="header__login__login">Log In</router-link>
-      <router-link to="/cadastrar" class="header__login__singin">Sing In</router-link>
+      <div v-if="awesome">
+        <router-link to="/" class="header__login__login">Avatar Usuário</router-link>
+        <router-link to="/" class="header__login__singin">Menu</router-link>
+      </div>
+      <div v-else>
+        <router-link to="/login" class="header__login__login">Log In</router-link>
+        <router-link to="/cadastrar" class="header__login__singin">Sing In</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +50,8 @@ export default {
 
 <style scoped lang="scss">
 @import './../assets/style/mixins';
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 .header {
   border-bottom: 1px solid $preto;
@@ -51,14 +59,21 @@ export default {
   height: 80px;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   &__logo {
-    width: 300px;
+    font-family: 'Titan One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 41px;
+    color: #3E8ED0;
+    text-shadow: 0px 6px 2px rgba(0, 0, 0, 0.25);
   }
   &__menu {
     & a {
-      color: $preto;
-      font-size: 1.6rem;
+      color: #333333;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 24px;
       font-weight: 700;
       margin: 0 10px;
       transition: 0.5s;
@@ -86,7 +101,8 @@ export default {
       border: none;
       border-radius: 10px;
       color: $branco;
-      font-size: 1.3rem;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 24px;
       font-weight: 700;
       height: 40px;
       margin: 0 5px;

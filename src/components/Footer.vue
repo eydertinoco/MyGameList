@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <img src="../../public/img/MyGameList.png" alt="MyGameList" class="footer__logo"/>
+    <p class="footer__logo">MyGameList</p>
     <div class="footer__social">
       <a href="https://pt-br.facebook.com/">
         <img src="../../public/img/social/facebook.png" alt="Facebook">
@@ -28,6 +28,8 @@ export default {
 
 <style scoped lang="scss">
 @import './../assets/style/mixins';
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 .footer {
   background-color: $azulClaro;
@@ -36,8 +38,14 @@ export default {
   align-items: center;
   justify-content: center;
   &__logo {
-    margin: 30px 0px 20px;
-    width: 300px;
+    font-family: "Titan One";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 41px;
+    color: #EEF2F5;
+    text-shadow: 0px 6px 2px rgb(0 0 0 / 25%);
+    margin: 20px;
   }
   &__social {
     margin: 10px 0;
