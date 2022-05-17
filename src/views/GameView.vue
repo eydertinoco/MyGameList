@@ -74,6 +74,7 @@ export default {
     }
   },
   beforeMount() {
+    window.scroll(0, 0);
     this.getGame();
   }
 }
@@ -117,6 +118,14 @@ export default {
       &__title {
         font-size: 2.8rem;
         font-weight: bold;
+      }
+
+      &__description {
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
+
+        margin-bottom: 1rem;
+        color: $preto;
+        opacity: 0.8;
       }
 
       &__badges {

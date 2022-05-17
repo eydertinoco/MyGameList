@@ -43,6 +43,11 @@ export default {
     width: calc(200px * 1.2);
     height: calc(272px * 1.2);
   }
+
+  transition: 0.3s;
+  &:hover {
+    transform: translateY(-8px);
+  }
 }
 
 </style>
