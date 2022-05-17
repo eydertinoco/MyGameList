@@ -11,13 +11,15 @@
 
     </div>
     <div class="home__games">
-      <h2>Seja o primeiro a avaliar</h2>
-      <div class="home__games__avaliar">
+      <div class="home__games__content">
+        <h2>Seja o primeiro a avaliar</h2>
+        <div class="home__games__avaliar">
 
-      </div>
-      <h2>Todos os jogos</h2>
-      <div class="home__games__all">
-
+        </div>
+        <h2>Todos os jogos</h2>
+        <div class="home__games__all">
+          <CardGame v-for="game in games" :key="game.id" :id="game.id" :thumbnail="game.thumbnail" :slug="game.slug"/>
+        </div>
       </div>
     </div>
 
@@ -25,19 +27,32 @@
 </template>
 
 <script>
+import CardGame from '@/components/CardGame.vue'
+import axios from 'axios';
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Home",
-  data() {
-    return {
-
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: "Home",
+    data() {
+        return {
+          games: [],
+        };
+    },
+    components: { CardGame },
+    methods: {
+      async findGames() {
+        const result = await axios.get('http://localhost:4040/games');
+        this.games = result.data;
+      }
+    },
+    beforeMount() {
+      this.findGames();
     }
-  },
 }
 </script>
 
 <style scoped lang="scss">
 @import './../assets/style/mixins';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 .home {
   &__intro {
@@ -51,13 +66,18 @@ export default {
       width: 350px;
     }
     &__text {
+      font-family: 'Poppins', sans-serif;
+      color: $preto;
       padding: 5vw;
       & h2 {
         font-weight: 700;
         font-size: 40px;
+        margin-bottom: 1rem;
+        line-height: 1.5;
       }
       & p {
         font-size: 24px;
+        line-height: 1.5;
       }
     }
   }
@@ -69,12 +89,32 @@ export default {
     background-repeat: no-repeat;
   }
   &__games {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: $azulEscuro;
     padding: 40px 60px;
     & h2 {
       color: $branco;
       font-weight: 600;
-      font-size: 36px;
+      font-size: 2.5rem;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      max-width: 1080px;
+    }
+
+    &__all {
+      margin-top: 1rem;
+      align-self: center;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      gap: 1rem 0.5rem;
+      flex-wrap: wrap;
+      padding: 0.5rem;
     }
   }
 }
