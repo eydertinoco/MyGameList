@@ -1,17 +1,20 @@
+<!--
 <template>
   <div class="gameview">
     <header class="game">
       <img :src="game.thumbnail" :alt="game.slug">
       <div class="game__content">
-        <h1 class="game__content__title">{{game.title}}</h1>
+        <h1 class="game__content__title">
+          {{ game.title }}
+        </h1>
         <p class="game__content__description">
-          {{game.description}}
+          {{ game.description }}
         </p>
 
         <div class="game__content__badges">
           <div class="game__content__badges__left">
             <div class="game__content__badges__left__item">
-              {{game.genre}}
+              {{ game.genre }}
             </div>
             <div class="game__content__badges__left__item">
               <span v-if="platform" >
@@ -33,15 +36,15 @@
       <div class="info__data">
         <div class="info__data__item">
           <strong>Release Date</strong>
-          <span>{{formatDate(game.release_date)}}</span>
+          <span>{{ formatDate(game.release_date) }}</span>
         </div>
         <div class="info__data__item">
           <strong>Developer</strong>
-          <span>{{game.developer}}</span>
+          <span>{{ game.developer }}</span>
         </div>
         <div class="info__data__item">
           <strong>Publisher</strong>
-          <span>{{game.publisher}}</span>
+          <span>{{ game.publisher }}</span>
         </div>
       </div>
     </section>
@@ -227,3 +230,4 @@ export default {
     }
   }
 </style>
+-->

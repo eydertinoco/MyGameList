@@ -1,5 +1,8 @@
 # MyGameList
 
+```
+npm run serve
+```
 ## Descrição
 É uma idealização dos alunos Agnes @xyagnesxy, Eyder @eydertinoco, Gabriel @GALMelo e Mikhael @BlueJayGM para a matérias Projeto Integrador, ministrado pelo professor Leonador Fernandes.
 

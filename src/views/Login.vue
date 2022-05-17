@@ -8,7 +8,7 @@
 
         <div class="card__field">
           <label>Conta</label>
-          <input type="text" v-model="username" required="true"/>
+          <input type="text" v-model="nickname" required="true"/>
         </div>
 
         <div class="card__field">
@@ -26,7 +26,7 @@
           </button>
         </div>
 
-        <router-link to="/login" class="register_account" >
+        <router-link to="/cadastrar" class="register_account" >
           Criar conta
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.172 6.778L6.808 1.414L8.222 0L16 7.778L8.222 15.556L6.808 14.142L12.172 8.778H0V6.778H12.172Z" fill="black"/>
@@ -45,24 +45,37 @@ export default {
   name: "Login",
   data() {
     return {
-      username: '',
+      nickname: '',
       password: '',
     }
   },
   methods: {
-    acessarConta(e) {
+    async acessarConta(e) {
       e.preventDefault();
-      console.log('Dados do usuário preenchido:');
+      console.log('Logando...');
 
-      const username = this.username;
-      const password = this.password;
+      const data = {
+        nickname: this.nickname,
+        password: this.password
+      }
 
-      console.log(username);
-      console.log(password);
+      console.log(data);
+      console.log('Autenticando...');
 
-      //ajax
+      const dataJson = JSON.stringify(data);
 
-      //banco de dados
+      const req = await fetch('http://localhost:4040/users', {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+        body: dataJson,
+      })
+
+      const res = await req.json();
+
+      //Limpar Campos
+      this.username = '';
+      this.password = '';
+      console.log(res);
     }
   }
 }

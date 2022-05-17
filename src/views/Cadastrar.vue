@@ -1,6 +1,7 @@
 <template>
   <div class="body">
-    <form action="" @submit="acessarConta($event)" class="form_cadastro">
+    <Message :msg="msg" v-show="msg"/>
+    <form action="" @submit="criarConta($event)" class="form_cadastro">
 
       <h1>Crie sua Conta</h1>
 
@@ -8,12 +9,12 @@
 
         <div class="card__field">
           <label>Conta</label>
-          <input type="text" v-model="username" required="true"/>
+          <input type="text" v-model="nickname" required="true"/>
         </div>
 
         <div class="card__field">
           <label>E-mail</label>
-          <input type="text" v-model="email" required="true"/>
+          <input type="email" v-model="email" required="true"/>
         </div>
 
         <div class="card__field">
@@ -44,31 +45,54 @@
 </template>
 
 <script>
+import Message from "@/components/Message";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Login",
+  components: {Message},
   data() {
     return {
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
+      nickname: null,
+      email: null,
+      password: null,
+      passwordConfirm: null,
+      msg: null,
     }
   },
   methods: {
-    acessarConta(e) {
+    async criarConta(e) {
       e.preventDefault();
-      console.log('Dados do usuário preenchido:');
+      if (this.password === this.passwordConfirm) {
+        const data = {
+          nickname: this.nickname,
+          email: this.email,
+          password: this.password
+        }
 
-      const username = this.username;
-      const password = this.password;
+        console.log(data);
 
-      console.log(username);
-      console.log(password);
+        const dataJson = JSON.stringify(data);
 
-      //ajax
-
-      //banco de dados
+        const req = await fetch('http://localhost:4040/users', {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: dataJson,
+        })
+        const res = await req.json();
+        //Mensagem
+        this.msg = `A conta com email ${res.email} foi criada com sucesso`;
+        setTimeout(() => this.msg='', 3000);
+        //Limpar Campos
+        this.nickname = '';
+        this.email = '';
+        this.password = '';
+        this.passwordConfirm = '';
+        console.log(res);
+      } else {
+        //Mensagem
+        this.msg = `Senha está incorreta.`;
+        setTimeout(() => this.msg='', 3000);
+      }
     }
   }
 }
