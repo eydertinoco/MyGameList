@@ -150,12 +150,22 @@ export default {
       }
     }
   },
-  beforeMount() {
+  async beforeMount() {
     window.scroll(0, 0);
-    this.getGame();
+    await this.getGame();
 
     let token = this.cookies.get('token-session');
     if (token) this.isLogged = true;
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}`}
+    };
+
+    const result = await axios.get(`http://localhost:4040/reviews/${this.game.id}`, config);
+    
+    if (result.data) {
+      this.hasReview = result.data.rate ? 1 : 0;
+    }
   }
 }
 </script>
