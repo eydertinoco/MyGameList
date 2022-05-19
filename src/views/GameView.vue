@@ -1,4 +1,4 @@
-<!--
+
 <template>
   <div class="gameview">
     <header class="game">
@@ -24,7 +24,7 @@
               </span>
             </div>
           </div>
-          <div class="game__content__badges__right">
+          <div v-if="isLogged" @click="openModal" class="game__content__badges__right">
             Avaliar
           </div>
         </div>
@@ -48,19 +48,40 @@
         </div>
       </div>
     </section>
+
+    <div class="modal" v-if="modalOpenned" >
+      <div class="modal-background" v-on:click="closeModal"></div>
+      <div class="modal-content">
+        <form action="" class="modal__form">
+          <div class="modal__form__rate">
+            <button>Like</button>
+            <button>Dislike</button>
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import moment from 'moment';
+import { useCookies } from 'vue3-cookies';
 
 export default {
   name: "GameView",
+  setup() {
+    const { cookies } = useCookies();
+    return { cookies };
+  },
   data() {
     return {
       game: {},
-      platform: ''
+      platform: '',
+      isLogged: false,
+      modalOpenned: false,
     }
   },
   methods: {
@@ -74,11 +95,24 @@ export default {
     formatDate(date) {
       moment.locale('pt-br');
       return moment(date).format('L');
+    },
+    openModal() {
+      this.modalOpenned = true;
+    },
+    closeModal(event) {
+      console.log(event.target);
+      if (event.target === event.currentTarget) {
+        this.modalOpenned = false;
+        console.log('close');
+      }
     }
   },
   beforeMount() {
     window.scroll(0, 0);
     this.getGame();
+
+    let token = this.cookies.get('token-session');
+    if (token) this.isLogged = true;
   }
 }
 </script>
@@ -89,6 +123,7 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
   .gameview {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
@@ -96,6 +131,11 @@ export default {
     flex-direction: column;
     
     font-family: 'Rajdhani', Arial, Helvetica, sans-serif;
+  }
+
+  .modal {
+    display: flex;
+    background: gray;
   }
 
   .game {
@@ -230,4 +270,3 @@ export default {
     }
   }
 </style>
--->

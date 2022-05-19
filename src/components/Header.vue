@@ -9,8 +9,8 @@
     <div class="header__login">
       <div v-if="isLogged.logged" id="logged">
         <img class="header__login__image" src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="">
-        <div class="header__login__menu" v-on:click="toggleMenu">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <div class="header__login__menu" ref="containerMenu" v-on:click="toggleMenu">
+          <svg  ref="menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
         </div>
         <div v-if="menu_openned" class="header__login__menu__options">
             <ul>
@@ -38,6 +38,18 @@ export const isLogged = reactive({
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Header",
+  mounted() {
+    
+    document.addEventListener('click', (event) => {
+      if ( this.menu_openned && (event.target != this.$refs.menu && event.target !== this.$refs.containerMenu) ) {
+        this.closeMenu();
+      }
+    });
+
+    document.addEventListener('scroll', () => {
+      if (this.menu_openned) this.closeMenu();
+    });
+  },
   setup() {
     const { cookies } = useCookies();
     return { cookies };
@@ -62,6 +74,9 @@ export default {
     },
     toggleMenu() {
       this.menu_openned = !this.menu_openned;
+    },
+    closeMenu() {
+      if (this.menu_openned) this.menu_openned = false;
     },
     acessarConta(e) {
       e.preventDefault();
@@ -166,6 +181,7 @@ export default {
         box-shadow: 0 0 0 1px black;
         padding: 0.2rem;
         background: $azulEscuro;
+        z-index: 100;
 
         li {
           color: white;
