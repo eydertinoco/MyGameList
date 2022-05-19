@@ -17,7 +17,7 @@
         </div>
 
         <router-link to="/resetPassword" class="forgot_passowrd card__reset">
-        Esqueci a senha
+          Esqueci a senha
         </router-link>
 
         <div class="card__submit">
@@ -40,9 +40,17 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+import { useCookies } from 'vue3-cookies';
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Login",
+  setup() {
+    const { cookies } = useCookies();
+    return { cookies };
+  },
   data() {
     return {
       nickname: '',
@@ -54,28 +62,15 @@ export default {
       e.preventDefault();
       console.log('Logando...');
 
-      const data = {
-        nickname: this.nickname,
-        password: this.password
-      }
-
-      console.log(data);
-      console.log('Autenticando...');
-
-      const dataJson = JSON.stringify(data);
-
-      const req = await fetch('http://localhost:4040/users', {
-        method: "GET",
-        headers: {"Content-Type": "application/json"},
-        body: dataJson,
+      const result = await axios.post('http://localhost:4040/users/auth', {
+        account: this.nickname,
+        password: this.password,
       })
 
-      const res = await req.json();
+      this.cookies.set('token-session', result.data, '24h');
 
-      //Limpar Campos
-      this.username = '';
-      this.password = '';
-      console.log(res);
+      window.location = '/';
+
     }
   }
 }
@@ -90,7 +85,7 @@ export default {
     font-weight: 700;
     font-size: 2.5rem;
     text-align: center;
-    margin: 3.2rem 0;
+    margin-top: 3.2rem;
   }
 
   .forgot_passowrd {

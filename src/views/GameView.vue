@@ -1,4 +1,4 @@
-<!--
+
 <template>
   <div class="gameview">
     <header class="game">
@@ -24,7 +24,7 @@
               </span>
             </div>
           </div>
-          <div class="game__content__badges__right">
+          <div v-if="isLogged" @click="openModal" class="game__content__badges__right">
             Avaliar
           </div>
         </div>
@@ -48,19 +48,43 @@
         </div>
       </div>
     </section>
+
+    <div class="rate__modal" @click="closeModal" v-if="modalOpenned">
+      <form action="" class="rate__modal__form">
+        <h2>Avalie <span>{{game.title}}</span></h2>
+        <div class="rate__modal__form__buttons">
+          <button type="button" ref="btnLike" disabled @click="onRate(1)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
+          </button>
+          <button type="button" ref="btnDislike" @click="onRate(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
+          </button>
+        </div>
+        <textarea></textarea>
+        <button type="submit" class="button is-success">Avaliar</button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import moment from 'moment';
+import { useCookies } from 'vue3-cookies';
 
 export default {
   name: "GameView",
+  setup() {
+    const { cookies } = useCookies();
+    return { cookies };
+  },
   data() {
     return {
       game: {},
-      platform: ''
+      platform: '',
+      isLogged: false,
+      modalOpenned: false,
+      rate: 1,
     }
   },
   methods: {
@@ -74,11 +98,32 @@ export default {
     formatDate(date) {
       moment.locale('pt-br');
       return moment(date).format('L');
+    },
+    openModal() {
+      this.modalOpenned = true;
+    },
+    closeModal(event) {
+      if (event.target === event.currentTarget) {
+        this.modalOpenned = false;
+      }
+    },
+    onRate(value) {
+      this.rate = Number(value);
+      if (value == 1) {
+        this.$refs.btnLike.setAttribute('disabled', true);
+        this.$refs.btnDislike.removeAttribute('disabled');
+      } else if (value == 0) {
+        this.$refs.btnDislike.setAttribute('disabled', true);
+        this.$refs.btnLike.removeAttribute('disabled');
+      }
     }
   },
   beforeMount() {
     window.scroll(0, 0);
     this.getGame();
+
+    let token = this.cookies.get('token-session');
+    if (token) this.isLogged = true;
   }
 }
 </script>
@@ -97,6 +142,134 @@ export default {
     
     font-family: 'Rajdhani', Arial, Helvetica, sans-serif;
   }
+
+  .rate__modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &__form {
+      background: white;
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+      padding: 1.2rem;
+      gap: 1.2rem;
+
+      h2 {
+        font-family: 'Rajdhani', Arial, Helvetica, sans-serif;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+
+        span {
+          color: $azulEscuro;
+        }
+      }
+
+      textarea {
+        outline: none;
+        border: none;
+        width: 100%;
+        min-height: 200px;
+        background: #c4c4c438;
+        border-radius: 4px;
+        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+        resize: none;
+        transition: 0.3s;
+        font-size: 1rem;
+        padding: 0.5rem;
+
+        &:hover {
+          box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        &::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+          cursor: pointer;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          background: $azulClaro;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: $azulEscuro; 
+        }
+      }
+
+      &__buttons {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        button {
+          outline: none;
+          border: none;
+          width: 50px;
+          height: 50px;
+          border-radius: 4px;
+          background: white;
+          cursor: pointer;
+          transition: 0.3s;
+
+          &:first-child {
+            box-shadow: 0 0 0 2px $azulClaro;
+            svg {
+              fill: $azulClaro;
+            }
+            &:hover {
+              box-shadow: 0 0 0 3px $azulClaro;
+            }
+            &:disabled {
+              background: $azulClaro;
+              color: white;
+              svg {
+                fill: white;
+              } 
+            }
+          }
+
+          &:last-child {
+            box-shadow: 0 0 0 2px #F14668;
+
+            svg {
+              fill: #F14668;
+            }
+            &:hover {
+              box-shadow: 0 0 0 3px #F14668;
+            }
+            &:disabled {
+              background: #F14668;
+              svg {
+                fill: white;
+              }
+            }
+          }
+
+          
+        }
+      }
+    }
+  }
+
 
   .game {
     display: flex;
@@ -230,4 +403,3 @@ export default {
     }
   }
 </style>
--->
