@@ -24,8 +24,16 @@
               </span>
             </div>
           </div>
-          <div v-if="isLogged" @click="openModal" class="game__content__badges__right">
+          <div v-if="isLogged && hasReview === -1" @click="openModal" class="game__content__badges__right">
             Avaliar
+          </div>
+          <div v-if="hasReview != -1" class="game__content__badges__review">
+            <span v-if="hasReview === 1" class="good">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
+            </span>
+            <span v-if="hasReview === 0" class="bad">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
+            </span>
           </div>
         </div>
       </div>
@@ -50,17 +58,17 @@
     </section>
 
     <div class="rate__modal" @click="closeModal" v-if="modalOpenned">
-      <form action="" class="rate__modal__form">
+      <form @submit="sendReview" class="rate__modal__form">
         <h2>Avalie <span>{{game.title}}</span></h2>
         <div class="rate__modal__form__buttons">
-          <button type="button" ref="btnLike" disabled @click="onRate(1)">
+          <button type="button" ref="btnLike" disabled @click="onRate(true)">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
           </button>
-          <button type="button" ref="btnDislike" @click="onRate(0)">
+          <button type="button" ref="btnDislike" @click="onRate(false)">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
           </button>
         </div>
-        <textarea></textarea>
+        <textarea v-model="comment" placeholder="Escreva um comentário"></textarea>
         <button type="submit" class="button is-success">Avaliar</button>
       </form>
     </div>
@@ -84,7 +92,9 @@ export default {
       platform: '',
       isLogged: false,
       modalOpenned: false,
-      rate: 1,
+      rate: true,
+      comment: '',
+      hasReview: -1,
     }
   },
   methods: {
@@ -108,13 +118,35 @@ export default {
       }
     },
     onRate(value) {
-      this.rate = Number(value);
-      if (value == 1) {
+      this.rate = value;
+      if (value) {
         this.$refs.btnLike.setAttribute('disabled', true);
         this.$refs.btnDislike.removeAttribute('disabled');
-      } else if (value == 0) {
+      } else {
         this.$refs.btnDislike.setAttribute('disabled', true);
         this.$refs.btnLike.removeAttribute('disabled');
+      }
+    },
+    async sendReview(event) {
+      event.preventDefault();
+      let token = this.cookies.get('token-session');
+      if ( token ) {
+
+        const config = {
+          headers: { Authorization: `Bearer ${token}`}
+        };
+        
+        setTimeout(() => { this.modalOpenned = false; }, 500);
+
+        let result = await axios.post('http://localhost:4040/reviews', {
+          comment: this.comment, 
+          rate: this.rate,
+          game_id: this.game.id,
+        }, config);
+
+        if (result) {
+          this.hasReview = this.rate ? 1 : 0;
+        }
       }
     }
   },
@@ -144,7 +176,7 @@ export default {
   }
 
   .rate__modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -350,8 +382,46 @@ export default {
 
           &:hover {
             color: $azulMedio;
-          box-shadow: 0 0 0 3px $azulMedio;
+            box-shadow: 0 0 0 3px $azulMedio;
           }
+        }
+
+        &__review {
+          
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: $azulClaro;
+          height: 40px;
+          width: 40px;
+          box-shadow: 0 3px 0 0 $verde;
+          cursor: pointer;
+          transition: 0.3s;
+
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          span svg {
+            transition: 0.3s;
+          }
+
+          span.good svg {
+            fill: $azulMedio;
+          }
+
+          span.bad svg {
+            fill: #F14668;
+          }
+
+          &:hover span svg {
+            transform: translateY(-5px);
+          }
+
         }
       }
     }
