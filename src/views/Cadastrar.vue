@@ -81,17 +81,14 @@ export default {
         const res = await req.json();
         //Mensagem
         this.msg = `A conta com email ${res.email} foi criada com sucesso`;
-        setTimeout(() => this.msg='', 3000);
-        //Limpar Campos
-        this.nickname = '';
-        this.email = '';
-        this.password = '';
-        this.passwordConfirm = '';
-        console.log(res);
+        setTimeout(() => { 
+          this.msg='';
+          this.$router.push('/login');
+        }, 3000);
       } else {
         //Mensagem
         this.msg = `Senha está incorreta.`;
-        setTimeout(() => this.msg='', 3000);
+        setTimeout(() => this.msg='', 1500);
       }
     }
   }
@@ -114,7 +111,7 @@ h1 {
   font-weight: 700;
   font-size: 2.5rem;
   text-align: center;
-  margin: 3.2rem 0;
+  margin-top: 3.2rem;
 }
 
 .card {
@@ -135,13 +132,20 @@ h1 {
       margin-bottom: 5px;
     }
     & input {
-      padding-left: 5px;
-      width: 100%;
-      background: #C4C4C426;
-      height: 50px;
-      font-size: 28px;
-      border: 1px solid #C4C4C470;
-      border-radius: 10px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background: #F0F0F0;
+    height: 50px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+
+      &:hover {
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+      }
+
     }
   }
   &__reset {
