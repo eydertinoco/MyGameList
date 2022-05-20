@@ -20,8 +20,8 @@
           </div>
       </div>
       <div v-else>
-        <router-link to="/login" class="header__login__login">Log In</router-link>
-        <router-link to="/cadastrar" class="header__login__singin">Sing In</router-link>
+        <router-link to="/login" class="header__login__login button is-info">Log In</router-link>
+        <router-link to="/cadastrar" class="header__login__singin button is-primary">Sing In</router-link>
       </div>
     </div>
   </div>
@@ -207,7 +207,7 @@ export default {
     }
     & a {
       border: none;
-      border-radius: 10px;
+      border-radius: 4px;
       color: $branco;
       font-family: "Rajdhani", sans-serif;
       font-size: 24px;
