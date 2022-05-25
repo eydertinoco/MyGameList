@@ -19,6 +19,11 @@ Axios é uma biblioteca JavaScript, um cliente HTTP utilizado para fazer requisi
 ```
 npm install axios
 ```
+### Tiny.docs
+```
+npm install --save "@tinymce/tinymce-vue@^4"
+https://www.tiny.cloud/docs/tinymce/6/vue-cloud/
+```
 
 
 ## Informações gerais

@@ -1,76 +1,81 @@
 
 <template>
-  <div class="gameview">
-    <header class="game">
-      <img :src="game.thumbnail" :alt="game.slug">
-      <div class="game__content">
-        <h1 class="game__content__title">
-          {{ game.title }}
-        </h1>
-        <p class="game__content__description">
-          {{ game.description }}
-        </p>
+  <div>
+    <div class="gameview">
+      <header class="game">
+        <img :src="game.thumbnail" :alt="game.slug">
+        <div class="game__content">
+          <h1 class="game__content__title">
+            {{ game.title }}
+          </h1>
+          <p class="game__content__description">
+            {{ game.description }}
+          </p>
 
-        <div class="game__content__badges">
-          <div class="game__content__badges__left">
-            <div class="game__content__badges__left__item">
-              {{ game.genre }}
-            </div>
-            <div class="game__content__badges__left__item">
+          <div class="game__content__badges">
+            <div class="game__content__badges__left">
+              <div class="game__content__badges__left__item">
+                {{ game.genre }}
+              </div>
+              <div class="game__content__badges__left__item">
               <span v-if="platform" >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 2.479L7.377 1.463V8.59H0V2.48V2.479ZM0 15.521L7.377 16.538V9.498H0V15.521ZM8.188 16.646L18 18V9.498H8.188V16.646ZM8.188 1.354V8.59H18V0L8.188 1.354Z" fill="#00D1B2"/>
                 </svg>
               </span>
+              </div>
             </div>
-          </div>
-          <div v-if="isLogged && hasReview === -1" @click="openModal" class="game__content__badges__right">
-            Avaliar
-          </div>
-          <div v-if="hasReview != -1" class="game__content__badges__review">
+            <div v-if="isLogged && hasReview === -1" @click="openModal" class="game__content__badges__right">
+              Avaliar
+            </div>
+            <div v-if="hasReview != -1" class="game__content__badges__review">
             <span v-if="hasReview === 1" class="good">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
             </span>
-            <span v-if="hasReview === 0" class="bad">
+              <span v-if="hasReview === 0" class="bad">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
             </span>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <section class="info">
-      <h1 class="info__title">Informations</h1>
-      <div class="info__data">
-        <div class="info__data__item">
-          <strong>Release Date</strong>
-          <span>{{ formatDate(game.release_date) }}</span>
+      <section class="info">
+        <h1 class="info__title">Informations</h1>
+        <div class="info__data">
+          <div class="info__data__item">
+            <strong>Release Date</strong>
+            <span>{{ formatDate(game.release_date) }}</span>
+          </div>
+          <div class="info__data__item">
+            <strong>Developer</strong>
+            <span>{{ game.developer }}</span>
+          </div>
+          <div class="info__data__item">
+            <strong>Publisher</strong>
+            <span>{{ game.publisher }}</span>
+          </div>
         </div>
-        <div class="info__data__item">
-          <strong>Developer</strong>
-          <span>{{ game.developer }}</span>
-        </div>
-        <div class="info__data__item">
-          <strong>Publisher</strong>
-          <span>{{ game.publisher }}</span>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <div class="rate__modal" @click="closeModal" v-if="modalOpenned">
-      <form @submit="sendReview" class="rate__modal__form">
-        <h2>Avalie <span>{{game.title}}</span></h2>
-        <div class="rate__modal__form__buttons">
-          <button type="button" ref="btnLike" disabled @click="onRate(true)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
-          </button>
-          <button type="button" ref="btnDislike" @click="onRate(false)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
-          </button>
-        </div>
-        <textarea v-model="comment" placeholder="Escreva um comentário"></textarea>
-        <button type="submit" class="button is-success">Avaliar</button>
-      </form>
+      <div class="rate__modal" @click="closeModal" v-if="modalOpenned">
+        <form @submit="sendReview" class="rate__modal__form">
+          <h2>Avalie <span>{{game.title}}</span></h2>
+          <div class="rate__modal__form__buttons">
+            <button type="button" ref="btnLike" disabled @click="onRate(true)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
+            </button>
+            <button type="button" ref="btnDislike" @click="onRate(false)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
+            </button>
+          </div>
+          <textarea v-model="comment" placeholder="Escreva um comentário"></textarea>
+          <button type="submit" class="button is-success">Avaliar</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <router-link to="/cadastrarTopicos">Cadastrar Tópico</router-link>
     </div>
   </div>
 </template>

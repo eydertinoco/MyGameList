@@ -27,6 +27,11 @@ const routes = [
         name: 'GameView',
         props: true,
         component: () => import('../views/GameView.vue')
+    },
+    {
+        path: '/cadastrarTopicos',
+        name: 'CadastrarTopicos',
+        component: () => import(/* webpackChunkName: "about" */ '../views/CadastrarTopicos.vue')
     }
 ]
 

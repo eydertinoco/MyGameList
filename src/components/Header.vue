@@ -2,7 +2,7 @@
   <div class="header">
     <router-link to="/" class="header__logo">MyGameList</router-link>
     <div class="header__menu">
-      <router-link to="/">Reviews</router-link>
+      <router-link to="/cadastrarTopicos">Reviews</router-link>
       <router-link to="/">About Us</router-link>
       <router-link to="/">News</router-link>
     </div>
