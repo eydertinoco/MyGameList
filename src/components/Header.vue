@@ -104,10 +104,20 @@ export default {
 .header {
   border-bottom: 1px solid $preto;
   display: flex;
-  height: 80px;
-  flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  @include for-desktop-only() {
+    flex-direction: row;
+    height: 80px;
+  }
+  @include for-tablet-only() {
+    flex-direction: column;
+    height: 150px;
+  }
+  @include for-phone-only() {
+    flex-direction: column;
+    height: 120px;
+  }
   &__logo {
     font-family: 'Titan One';
     font-style: normal;
@@ -118,6 +128,11 @@ export default {
     text-shadow: 0px 6px 2px rgba(0, 0, 0, 0.25);
   }
   &__menu {
+    @include for-phone-only() {
+      visibility: hidden;
+      height: 0px;
+      width: 0px;
+    }
     & a {
       color: #333333;
       font-family: "Rajdhani", sans-serif;
@@ -137,6 +152,9 @@ export default {
     }
   }
   &__login {
+    @include for-phone-only() {
+
+    }
 
     #logged {
       display: flex;

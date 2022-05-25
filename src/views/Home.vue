@@ -61,9 +61,23 @@ export default {
     justify-content: center;
     flex-direction: row;
     margin-top: 40px;
+    @include for-phone-only() {
+      flex-direction: column;
+    }
     &__img {
-      margin: 9vw;
-      width: 350px;
+      @include for-desktop-only() {
+        margin: 9vw;
+        width: 350px;
+      }
+      @include for-tablet-only() {
+        margin: 5vw;
+        width: 220px;
+      }
+      @include for-phone-only() {
+        margin: 0;
+        visibility: hidden;
+        width: 0px;
+      }
     }
     &__text {
       font-family: 'Poppins', sans-serif;

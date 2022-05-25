@@ -186,6 +186,9 @@ export default {
       display: flex;
       flex-direction: column;
       margin: 1.2rem 0;
+      @include for-phone-only() {
+        width: 100%;
+      }
       &__btn {
         background: $azulClaro;
         border: 0px;
