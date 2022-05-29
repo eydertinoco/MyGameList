@@ -21,8 +21,8 @@
       <CardTopico tituloTopico="Mosquito" nomeCriador="Mikhael" dataCriacao="29/05/2022"/>
     </router-link>
 
-    <CardAvaliacao notaAvaliacao="true" nomeCriador="Eyder" dataAvaliacao="29/05/2022"
-                   descricaoAvaliacao="Esse jogo é foda!!"/>
+    <CardAvaliacao notaAvaliacao="{{ GameView.rate }}" nomeCriador="{{ userName }}" dataAvaliacao="{{ dataAvaliacao }}"
+                   descricaoAvaliacao="{{ descricaoAvaliacao }}"/>
 
   </div>
 </template>
@@ -30,11 +30,28 @@
 <script>
 import CardTopico from "@/components/CardTopico";
 import CardAvaliacao from "@/components/CardAvaliacao";
+import axios from "axios";
 
 export default {
   name: "GameActivity",
   components: {CardAvaliacao, CardTopico},
-
+  data() {
+    return {
+      rate: true,
+      userName: '',
+      dataAvaliacao: '',
+      descricaoAvaliacao: 'Esse jogo é foda!',
+    }
+  },
+  methods: {
+    async getGame() {
+      const result = await axios.get('http://localhost:4040/games');
+      this.games = result.data;
+      const slug = document.location.pathname.split('/')[2];
+      this.game = this.games.filter((game) => game.slug === slug)[0];
+      this.platform = this.game.platform.split(' ')[1].replace('(', ' ').replace(')', ' ').toLowerCase();
+    },
+  }
 }
 
 </script>
