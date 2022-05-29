@@ -1,31 +1,34 @@
 <template>
   <div class="userCard">
-    <User/>
+    <UserInfo/>
     <hr>
-    <div>
-      <p>Meus Tópicos</p>
-      <p>minhas Avaliações</p>
-      <p>Favoritos</p>
-
-      <router-link to="/">
-        <CardTopico/>
-      </router-link>
-    </div>
+    <UserActivity/>
   </div>
 </template>
 
 <script>
-import User from "@/components/User";
-import CardTopico from "@/components/CardTopico";
+import UserInfo from "@/components/UserInfo";
+import UserActivity from "@/components/UserActivity";
 export default {
   name: "UserView",
-  components: {CardTopico, User},
+  components: {UserActivity, UserInfo},
 }
 
 </script>
 
 <style scoped lang="scss">
-  .userCard {
+  @import "src/assets/style/mixins";
 
+  .userCard {
+    @include for-desktop-only() {
+      margin: 0 auto;
+      width: 960px;
+    }
+    @include for-tablet-only() {
+      margin: 0 60px;
+    }
+    @include for-phone-only() {
+      margin: 0 10px;
+    }
   }
 </style>

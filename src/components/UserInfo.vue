@@ -1,9 +1,9 @@
 <template>
-  <div class="userCard">
+  <div class="userInfo">
     <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
-    <p class="userCard__name">UserName</p>
-    <p class="userCard__email">Email</p>
-    <button class="userCard__editButton">Editar Perfil</button>
+    <p class="userInfo__name">UserName</p>
+    <p class="userInfo__email">Email</p>
+    <button class="userInfo__editButton">Editar Perfil</button>
   </div>
 </template>
 
@@ -17,10 +17,10 @@ export default {
 <style scoped lang="scss">
   @import "src/assets/style/mixins";
 
-  .userCard {
+  .userInfo {
     height: auto;
     text-align: center;
-    margin: 20px auto;
+    margin: 60px auto;
     width: 300px;
     & img {
       border: 0px;
@@ -34,6 +34,7 @@ export default {
     }
     &__email {
       font-size: 16px;
+      margin: 15px 0;
     }
     &__editButton {
       border: 3px solid $azulClaro;

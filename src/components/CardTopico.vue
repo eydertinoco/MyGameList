@@ -25,12 +25,20 @@ export default {
     border: 1px solid $cinza;
     border-radius: 10px;
     display: flex;
-    margin: 10px auto;
+    margin: 10px auto 20px;
     min-height: 80px;
     padding: 15px;
     height: auto;
     transition: 0.5s;
-    width: 960px;
+    @include for-desktop-only() {
+      width: 960px;
+    }
+    @include for-tablet-only() {
+      width: 100%;
+    }
+    @include for-phone-only() {
+      width: 100%;
+    }
     &:hover {
       border: 1px solid $azulClaro;
       transition: 0.5s;
@@ -58,7 +66,7 @@ export default {
       display: flex;
       & p {
         font-size: 16px;
-        color: $preto;
+        color: $cinzaEscuro;
         transition: 0.5s;
       }
       &__separador {
