@@ -2,11 +2,11 @@
   <div class="cardTopico">
     <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
     <div class="cardTopico__text">
-      <h4>Titulo do Tópico</h4>
+      <h4>{{ tituloTopico }}</h4>
       <div class="cardTopico__userInfo">
-        <p>Nome do usuário</p>
+        <p>{{ nomeCriador }}</p>
         <p class="cardTopico__userInfo__separador">-</p>
-        <p>Data</p>
+        <p>{{ dataAtualizada }}</p>
       </div>
     </div>
   </div>
@@ -14,7 +14,21 @@
 
 <script>
 export default {
-  name: "CardTopico"
+  name: "CardTopico",
+  props: {
+    tituloTopico: {
+      type: String,
+      default: () => "Titulo",
+    },
+    nomeCriador: {
+      type: String,
+      default: () => "Desconhecido",
+    },
+    dataAtualizada: {
+      type: Date,
+      default: () => "01/01/1900",
+    }
+  }
 }
 </script>
 

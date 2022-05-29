@@ -7,8 +7,15 @@
     </div>
 
     <router-link to="/">
-      <CardTopico/>
+      <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
     </router-link>
+    <router-link to="/">
+      <CardTopico tituloTopico="Railander" nomeCriador="Agnes" dataCriacao="29/05/2022"/>
+    </router-link>
+    <router-link to="/">
+      <CardTopico tituloTopico="Mosquito" nomeCriador="Mikhael" dataCriacao="29/05/2022"/>
+    </router-link>
+
   </div>
 </template>
 
@@ -18,6 +25,7 @@ import CardTopico from "@/components/CardTopico";
 export default {
   name: "UserActivity",
   components: {CardTopico},
+
 }
 
 </script>

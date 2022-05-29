@@ -1,6 +1,5 @@
-
 <template>
-  <div>
+  <div class="gameCard">
     <div class="gameview">
       <header class="game">
         <img :src="game.thumbnail" :alt="game.slug">
@@ -39,7 +38,6 @@
           </div>
         </div>
       </header>
-
       <section class="info">
         <h1 class="info__title">Informations</h1>
         <div class="info__data">
@@ -57,7 +55,6 @@
           </div>
         </div>
       </section>
-
       <div class="rate__modal" @click="closeModal" v-if="modalOpenned">
         <form @submit="sendReview" class="rate__modal__form">
           <h2>Avalie <span>{{game.title}}</span></h2>
@@ -74,9 +71,8 @@
         </form>
       </div>
     </div>
-    <div>
-      <router-link to="/cadastrarTopicos">Cadastrar Tópico</router-link>
-    </div>
+    <hr>
+    <GameActivity/>
   </div>
 </template>
 
@@ -84,9 +80,11 @@
 import axios from 'axios';
 import moment from 'moment';
 import { useCookies } from 'vue3-cookies';
+import GameActivity from "@/components/GameActivity";
 
 export default {
   name: "GameView",
+  components: {GameActivity},
   setup() {
     const { cookies } = useCookies();
     return { cookies };
@@ -177,8 +175,19 @@ export default {
 
 <style scoped lang="scss">
   @import './../assets/style/mixins';
-  @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+  .gameCard {
+    @include for-desktop-only() {
+      margin: 0 auto;
+      width: 960px;
+    }
+    @include for-tablet-only() {
+      margin: 0 60px;
+    }
+    @include for-phone-only() {
+      margin: 0 10px;
+    }
+  }
 
   .gameview {
     width: 100%;
