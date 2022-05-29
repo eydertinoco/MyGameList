@@ -6,6 +6,8 @@
 
       <div class="card">
 
+        <Input/>
+
         <div class="card__field">
           <label>Titulo</label>
           <input type="text" v-model="titulo" required="true"/>
@@ -32,12 +34,13 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
+import Input from '@/components/Input'
 
 export default {
   name: 'CadastrarTopicos',
   components: {
     // eslint-disable-next-line vue/no-unused-components
-    'editor': Editor
+    'editor': Editor, Input
   }
 }
 </script>
@@ -64,15 +67,12 @@ h1 {
   .card {
     @include for-desktop-only() {
       width: 960px;
-      margin: 60px auto 180px;
     }
     @include for-tablet-only() {
       width: 600px;
-      margin: 30px auto 180px;
     }
     @include for-phone-only () {
       width: 100%;
-      margin: 30px auto 180px;
     }
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    margin-bottom: 2rem;
+    margin: 10px auto 60px;
 
   &__field {
      display: flex;

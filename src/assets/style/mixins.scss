@@ -2,9 +2,12 @@ $azulEscuro: #2F82B4;
 $azulMedio: #339cd9;
 $azulClaro: #3BB1F7;
 $verde: #00D1B2;
+$cinza: #cfcfcf;
 $branco: #ffffff;
 $preto: #333333;
 $transparente: none;
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 @mixin for-phone-only {
   @media (max-width: 640.98px) { @content; }

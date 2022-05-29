@@ -78,7 +78,6 @@ export default {
 
 <style scoped lang="scss">
 @import './../assets/style/mixins.scss';
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
   h1 {
     color: $preto;

@@ -18,6 +18,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/Cadastrar.vue')
     },
     {
+        path: '/userview',
+        name: 'UserView',
+        component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue')
+    },
+    {
         path: '/resetPassword',
         name: 'ResetPassword',
         component: () => import(/* webpackChunkName: "about" */ '../views/ResetPassword.vue')
