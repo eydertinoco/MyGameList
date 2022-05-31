@@ -11,13 +11,13 @@
       </router-link>
     </div>
 
-    <router-link to="/">
+    <router-link to="/topicView">
       <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
     </router-link>
-    <router-link to="/">
+    <router-link to="/topicView">
       <CardTopico tituloTopico="Railander" nomeCriador="Agnes" dataCriacao="29/05/2022"/>
     </router-link>
-    <router-link to="/">
+    <router-link to="/topicView">
       <CardTopico tituloTopico="Mosquito" nomeCriador="Mikhael" dataCriacao="29/05/2022"/>
     </router-link>
 
@@ -51,6 +51,11 @@ export default {
       this.game = this.games.filter((game) => game.slug === slug)[0];
       this.platform = this.game.platform.split(' ')[1].replace('(', ' ').replace(')', ' ').toLowerCase();
     },
+    async getReview() {
+      const result = await axios.get('http://localhost:4040/reviews');
+      this.games = result.data;
+
+    }
   }
 }
 

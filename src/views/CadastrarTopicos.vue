@@ -6,8 +6,6 @@
 
       <div class="card">
 
-        <Input/>
-
         <div class="card__field">
           <label>Titulo</label>
           <input type="text" v-model="titulo" required="true"/>
@@ -34,13 +32,12 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
-import Input from '@/components/Input'
 
 export default {
   name: 'CadastrarTopicos',
   components: {
     // eslint-disable-next-line vue/no-unused-components
-    'editor': Editor, Input
+    'editor': Editor,
   }
 }
 </script>

@@ -6,13 +6,13 @@
       <p>Favoritos</p>
     </div>
 
-    <router-link to="/">
+    <router-link to="/topicView">
       <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
     </router-link>
-    <router-link to="/">
+    <router-link to="/topicView">
       <CardTopico tituloTopico="Railander" nomeCriador="Agnes" dataCriacao="29/05/2022"/>
     </router-link>
-    <router-link to="/">
+    <router-link to="/topicView">
       <CardTopico tituloTopico="Mosquito" nomeCriador="Mikhael" dataCriacao="29/05/2022"/>
     </router-link>
 
