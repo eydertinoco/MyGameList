@@ -2,23 +2,32 @@
   <div>
     <form action="" class="form_reset">
 
-      <h1>Restaurar Senha</h1>
+      <h1>Alterar Senha</h1>
 
-      <div class="card">
+      <div v-if="!updated" class="card">
 
-        <div v-if="!sent" class="card__field">
-          <label>E-mail</label>
-          <input type="text" v-model="email" required="true"/>
+        <div class="card__field">
+          <label>Nova Senha</label>
+          <input type="password" v-model="password" required="true"/>
         </div>
 
-        <div v-if="!sent" class="card__submit">
-          <button type="button" class="card__submit__btn" @click="forgotPassword">
+        <div class="card__field">
+          <label>Confirmar Senha</label>
+          <input type="password" v-model="confirmPassword" required="true"/>
+        </div>
+
+        <div class="card__submit">
+          <button type="button" class="card__submit__btn" @click="changePassword">
             Restaurar
           </button>
         </div>
 
-        <div v-else class="card__info">
-          O link para alterar sua senha foi enviado para seu email! 😳
+      </div>
+
+      <div v-else class="card">
+
+        <div class="card__info">
+          Senha atualizada!
         </div>
 
       </div>
@@ -31,23 +40,32 @@
 import axios from 'axios';
 
 export default {
-  name: "ResetPassword",
+  name: "ChangePassword",
   data() {
     return {
-      email: '',
-      sent: false,
+      password: '',
+      confirmPassword: '',
+      token: '',
+      updated: false,
     }
   },
   methods: {
-    async forgotPassword(){
-      const result = await axios.post('http://localhost:4040/users/forgot', {
-        email: this.email,
-      })
+    async changePassword(){
+      if ( this.password === this.confirmPassword ) {
+        const result = await axios.post('http://localhost:4040/users/change_password', {
+          newPassword: this.password,
+          token: this.token,
+        });
 
-      if ( result )
-      {
-        this.sent = true;
+        if ( result ) {
+          this.updated = true;
+        }
       }
+    }
+  },
+  beforeMount() {
+    if (this.$route.query.token) {
+      this.token = this.$route.query.token;
     }
   }
 }
