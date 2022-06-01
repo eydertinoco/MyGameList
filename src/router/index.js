@@ -33,6 +33,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/ResetPassword.vue')
     },
     {
+        path: '/changepassword',
+        name: 'ChangePassword',
+        component: () => import('../views/ChangePassword.vue')
+    },
+    {
         path: '/games/:game',
         name: 'GameView',
         props: true,
