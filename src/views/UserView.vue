@@ -1,6 +1,6 @@
 <template>
   <div class="userCard">
-    <UserInfo/>
+    <UserInfo :username="username" :email="email" />
     <hr>
     <UserActivity/>
   </div>
@@ -9,9 +9,39 @@
 <script>
 import UserInfo from "@/components/UserInfo";
 import UserActivity from "@/components/UserActivity";
+import axios from 'axios';
+import { useCookies } from 'vue3-cookies';
+
 export default {
   name: "UserView",
+  setup() {
+    const { cookies } = useCookies();
+    return { cookies };
+  },
+  data() {
+    return {
+      username: 'a',
+      email: 'a',
+    }
+  },
   components: {UserActivity, UserInfo},
+  async beforeMount() {
+    let token = this.cookies.get('token-session');
+    if (!token) this.$router.push('/login');
+    const config = {
+      headers: { Authorization: `Bearer ${token}`}
+    };
+
+    const { data } = await axios.get('http://localhost:4040/users/logged', config);
+    const user = data;
+    if ( user ) {
+      this.username = user.username;
+      this.email = user.email;
+    } else {
+      this.cookies.remove('token-session');
+      this.$router.push('/login');
+    }
+  }
 }
 
 </script>

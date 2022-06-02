@@ -6,7 +6,7 @@
     </div>
 
     <div class="gameActivity__newTopic">
-      <router-link to="/cadastrarTopicos">
+      <router-link :to="gameuri">
         Cadastrar Tópico
       </router-link>
     </div>
@@ -30,32 +30,24 @@
 <script>
 import CardTopico from "@/components/CardTopico";
 import CardAvaliacao from "@/components/CardAvaliacao";
-import axios from "axios";
 
 export default {
   name: "GameActivity",
   components: {CardAvaliacao, CardTopico},
+  props: {
+    gameSlug: String,
+  },
   data() {
     return {
       rate: true,
       userName: '',
       dataAvaliacao: '',
       descricaoAvaliacao: 'Esse jogo é foda!',
+      gameuri: `/cadastrarTopicos/${this.gameSlug}`
     }
   },
-  methods: {
-    async getGame() {
-      const result = await axios.get('http://localhost:4040/games');
-      this.games = result.data;
-      const slug = document.location.pathname.split('/')[2];
-      this.game = this.games.filter((game) => game.slug === slug)[0];
-      this.platform = this.game.platform.split(' ')[1].replace('(', ' ').replace(')', ' ').toLowerCase();
-    },
-    async getReview() {
-      const result = await axios.get('http://localhost:4040/reviews');
-      this.games = result.data;
-
-    }
+  updated() {
+    this.gameuri = `/cadastrarTopicos/${this.gameSlug}`;
   }
 }
 
