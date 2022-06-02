@@ -1,16 +1,21 @@
 <template>
   <div class="userInfo">
     <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
-    <p class="userInfo__name">UserName</p>
-    <p class="userInfo__email">Email</p>
+    <p class="userInfo__name">{{username}}</p>
+    <p class="userInfo__email">{{email}}</p>
     <button class="userInfo__editButton">Editar Perfil</button>
   </div>
 </template>
 
 <script>
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "User"
+  name: "User",
+  props: {
+    username: String,
+    email: String,
+  }
 }
 </script>
 
