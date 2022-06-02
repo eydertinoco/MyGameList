@@ -162,8 +162,12 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.5rem;
       position: relative;
+
+      & a {
+        max-width: 50px;
+      }
     }
 
     &__image {
