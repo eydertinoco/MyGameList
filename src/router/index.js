@@ -44,7 +44,7 @@ const routes = [
         component: () => import('../views/GameView.vue')
     },
     {
-        path: '/cadastrarTopicos',
+        path: '/cadastrarTopicos/:game',
         name: 'CadastrarTopicos',
         component: () => import(/* webpackChunkName: "about" */ '../views/CadastrarTopicos.vue')
     }
