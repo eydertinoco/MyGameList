@@ -9,7 +9,7 @@
 <script>
 import UserInfo from "@/components/UserInfo";
 import UserActivity from "@/components/UserActivity";
-import axios from 'axios';
+import { server } from '../services/config';
 import { useCookies } from 'vue3-cookies';
 
 export default {
@@ -32,7 +32,7 @@ export default {
       headers: { Authorization: `Bearer ${token}`}
     };
 
-    const { data } = await axios.get('http://localhost:4040/users/logged', config);
+    const { data } = await server.get('/users/logged', config);
     const user = data;
     if ( user ) {
       this.username = user.username;

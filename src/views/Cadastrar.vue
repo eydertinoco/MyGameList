@@ -46,6 +46,7 @@
 
 <script>
 import Message from "@/components/Message";
+import { server } from '../services/config';
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Login",
@@ -63,28 +64,20 @@ export default {
     async criarConta(e) {
       e.preventDefault();
       if (this.password === this.passwordConfirm) {
-        const data = {
+        const req = await server.post('/users', {
           nickname: this.nickname,
           email: this.email,
           password: this.password
-        }
-
-        console.log(data);
-
-        const dataJson = JSON.stringify(data);
-
-        const req = await fetch('http://localhost:4040/users', {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: dataJson,
         })
-        const res = await req.json();
-        //Mensagem
-        this.msg = `A conta com email ${res.email} foi criada com sucesso`;
-        setTimeout(() => { 
-          this.msg='';
-          this.$router.push('/login');
-        }, 3000);
+
+        if (req.data) {
+          //Mensagem
+          this.msg = `A conta com email ${req.data.email} foi criada com sucesso`;
+          setTimeout(() => { 
+            this.msg='';
+            this.$router.push('/login');
+          }, 3000);
+        }
       } else {
         //Mensagem
         this.msg = `Senha está incorreta.`;

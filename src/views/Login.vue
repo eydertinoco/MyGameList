@@ -40,8 +40,7 @@
 </template>
 
 <script>
-
-import axios from 'axios';
+import { server } from '../services/config';
 import { useCookies } from 'vue3-cookies';
 
 export default {
@@ -62,7 +61,7 @@ export default {
       e.preventDefault();
       console.log('Logando...');
 
-      const result = await axios.post('http://localhost:4040/users/auth', {
+      const result = await server.post('/users/auth', {
         account: this.nickname,
         password: this.password,
       })

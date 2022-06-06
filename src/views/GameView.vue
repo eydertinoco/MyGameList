@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { server } from '../services/config';
 import moment from 'moment';
 import { useCookies } from 'vue3-cookies';
 import GameActivity from "@/components/GameActivity";
@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     async getGame() {
-      const result = await axios.get('http://localhost:4040/games');
+      const result = await server.get('/games');
       this.games = result.data;
       const slug = document.location.pathname.split('/')[2];
       this.game = this.games.filter((game) => game.slug === slug)[0];
@@ -141,7 +141,7 @@ export default {
         
         setTimeout(() => { this.modalOpenned = false; }, 500);
 
-        let result = await axios.post('http://localhost:4040/reviews', {
+        let result = await server.post('/reviews', {
           comment: this.comment, 
           rate: this.rate,
           game_id: this.game.id,
@@ -160,14 +160,16 @@ export default {
     let token = this.cookies.get('token-session');
     if (token) this.isLogged = true;
 
-    const config = {
-      headers: { Authorization: `Bearer ${token}`}
-    };
+    if (this.isLogged) {
+      const config = {
+        headers: { Authorization: `Bearer ${token}`}
+      };
 
-    const result = await axios.get(`http://localhost:4040/reviews/${this.game.id}`, config);
-    
-    if (result.data) {
-      this.hasReview = result.data.rate ? 1 : 0;
+      const result = await server.get(`/reviews/game/${this.game.id}`, config);
+      
+      if (result.data) {
+        this.hasReview = result.data.rate ? 1 : 0;
+      }
     }
   }
 }
