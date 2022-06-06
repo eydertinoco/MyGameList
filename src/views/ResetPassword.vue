@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { server } from '../services/config';
 
 export default {
   name: "ResetPassword",
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     async forgotPassword(){
-      const result = await axios.post('http://localhost:4040/users/forgot', {
+      const result = await server.post('/users/forgot', {
         email: this.email,
       })
 

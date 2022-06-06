@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export const http = axios.create({
-    baseURL: 'https://www.freetogame.com/api/games'
+export const server = axios.create({
+    baseURL: 'https://mygamelist-backend-production.up.railway.app/'
 })

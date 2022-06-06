@@ -28,7 +28,7 @@
 
 <script>
 import CardGame from '@/components/CardGame.vue'
-import axios from 'axios';
+import { server } from '../services/config';
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Home",
@@ -40,7 +40,7 @@ export default {
     components: { CardGame },
     methods: {
       async findGames() {
-        const result = await axios.get('http://localhost:4040/games');
+        const result = await server.get('/games');
         this.games = result.data;
       }
     },

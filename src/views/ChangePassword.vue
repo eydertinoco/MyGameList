@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { server } from '../services/config';
 
 export default {
   name: "ChangePassword",
@@ -52,7 +52,7 @@ export default {
   methods: {
     async changePassword(){
       if ( this.password === this.confirmPassword ) {
-        const result = await axios.post('http://localhost:4040/users/change_password', {
+        const result = await server.post('/users/change_password', {
           newPassword: this.password,
           token: this.token,
         });

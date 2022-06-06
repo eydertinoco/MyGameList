@@ -38,7 +38,7 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue';
-import axios from 'axios';
+import { server } from '../services/config';
 import { useCookies } from 'vue3-cookies';
 
 export default {
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     async getGame() {
-      const result = await axios.get('http://localhost:4040/games');
+      const result = await server.get('/games');
       this.games = result.data;
       const slug = document.location.pathname.split('/')[2];
       this.game = this.games.filter((game) => game.slug === slug)[0];
@@ -79,7 +79,7 @@ export default {
             headers: { Authorization: `Bearer ${token}`}
           };
 
-          const result = await axios.post('http://localhost:4040/topics', {
+          const result = await server.post('/topics', {
             title: this.title,
             description: this.description,
             content: this.content,
