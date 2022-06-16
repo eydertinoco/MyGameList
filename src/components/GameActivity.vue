@@ -1,9 +1,5 @@
 <template>
   <div class="gameActivity">
-    <div class="gameActivity__menu">
-      <p>Tópicos</p>
-      <p>Avaliações</p>
-    </div>
 
     <div class="gameActivity__newTopic">
       <router-link :to="gameuri">
@@ -11,18 +7,21 @@
       </router-link>
     </div>
 
-    <router-link to="/topicView">
-      <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
-    </router-link>
-    <router-link to="/topicView">
-      <CardTopico tituloTopico="Railander" nomeCriador="Agnes" dataCriacao="29/05/2022"/>
-    </router-link>
-    <router-link to="/topicView">
-      <CardTopico tituloTopico="Mosquito" nomeCriador="Mikhael" dataCriacao="29/05/2022"/>
-    </router-link>
+    <div class="gameActivity__menu">
+      <button @click="tabList === true">Tópicos</button>
+      <button @click="tabList === false">Avaliações</button>
+    </div>
 
-    <CardAvaliacao notaAvaliacao="{{ GameView.rate }}" nomeCriador="{{ userName }}" dataAvaliacao="{{ dataAvaliacao }}"
-                   descricaoAvaliacao="{{ descricaoAvaliacao }}"/>
+    <div v-if="tabList === true">
+      <router-link to="/topicView">
+        <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
+      </router-link>
+    </div>
+
+    <div v-else>
+      <CardAvaliacao notaAvaliacao="{{ GameView.rate }}" nomeCriador="{{ userName }}" dataAvaliacao="{{ dataAvaliacao }}"
+                     descricaoAvaliacao="{{ descricaoAvaliacao }}"/>
+    </div>
 
   </div>
 </template>
@@ -39,6 +38,7 @@ export default {
   },
   data() {
     return {
+      tabList: true,
       rate: true,
       userName: '',
       dataAvaliacao: '',
@@ -62,7 +62,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 20px 0;
-    & p {
+    & button {
+      background: none;
+      border: none;
       color: $cinzaEscuro;
       font-size: 24px;
       font-weight: 600;

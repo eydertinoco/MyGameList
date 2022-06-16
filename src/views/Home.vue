@@ -96,7 +96,7 @@ export default {
     }
   }
   &__bestGame {
-    background-image: url("../../public/img/fundoEstiloEdit.png");
+    background-image: url("../../public/img/fundoEstilo.png");
     background-color: $azulClaro;
     height: 400px;
     background-size: contain;
