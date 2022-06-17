@@ -93,7 +93,7 @@ export default {
       //ajax
 
       //banco de dados
-    }
+    },
   }
 }
 </script>
