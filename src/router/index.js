@@ -56,8 +56,6 @@ const router = createRouter({
     routes
 })
 
-trackRouter(router, {
-    useScreenview: true
-});
+trackRouter(router);
 
 export default router

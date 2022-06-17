@@ -9,8 +9,15 @@ import VueGtag from "vue-gtag-next"
 
 library.add(fas, fab);
 
-createApp(App)
-    .use(VueGtag, {config: { id: "UA-206254002-3" }})
-    .use(router)
-    .component("FontAwesome", FontAwesomeIcon)
-    .mount('#app');
+const app = createApp(App);
+
+app.use(VueGtag, {property: {id: "UA-206254002-3"}});
+app.use(router);
+app.component("FontAwesome", FontAwesomeIcon)
+app.mount("#app");
+
+// createApp(App)
+//     .use(VueGtag, {config: { id: "UA-206254002-3" }})
+//     .use(router)
+//     .component("FontAwesome", FontAwesomeIcon)
+//     .mount('#app');
