@@ -12,10 +12,12 @@
     </div>
     <div class="home__games">
       <div class="home__games__content">
+        <!--
         <h2>Seja o primeiro a avaliar</h2>
         <div class="home__games__avaliar">
 
         </div>
+        -->
         <h2>Todos os jogos</h2>
         <div class="home__games__all">
           <CardGame v-for="game in games" :key="game.id" :id="game.id" :thumbnail="game.thumbnail" :slug="game.slug"/>

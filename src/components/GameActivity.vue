@@ -1,27 +1,31 @@
 <template>
   <div class="gameActivity">
 
-    <div class="gameActivity__newTopic">
-      <router-link :to="gameuri">
-        Cadastrar Tópico
-      </router-link>
-    </div>
+    <form>
 
-    <div class="gameActivity__menu">
-      <button @click="tabList === true">Tópicos</button>
-      <button @click="tabList === false">Avaliações</button>
-    </div>
+      <div class="gameActivity__newTopic">
+        <router-link :to="gameuri">
+          Cadastrar Tópico
+        </router-link>
+      </div>
 
-    <div v-if="tabList === true">
-      <router-link to="/topicView">
-        <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
-      </router-link>
-    </div>
+      <div class="gameActivity__menu">
+        <button @click="tabList === true">Tópicos</button>
+        <button @click="tabList === false">Avaliações</button>
+      </div>
 
-    <div v-else>
-      <CardAvaliacao notaAvaliacao="{{ GameView.rate }}" nomeCriador="{{ userName }}" dataAvaliacao="{{ dataAvaliacao }}"
-                     descricaoAvaliacao="{{ descricaoAvaliacao }}"/>
-    </div>
+      <div v-if="tabList === true">
+        <router-link to="/topicView">
+          <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
+        </router-link>
+      </div>
+
+      <div v-else>
+        <CardAvaliacao notaAvaliacao="{{ GameView.rate }}" nomeCriador="{{ userName }}" dataAvaliacao="{{ dataAvaliacao }}"
+                       descricaoAvaliacao="{{ descricaoAvaliacao }}"/>
+      </div>
+
+    </form>
 
   </div>
 </template>
