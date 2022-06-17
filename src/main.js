@@ -9,15 +9,17 @@ import VueGtag from "vue-gtag-next"
 
 library.add(fas, fab);
 
-const app = createApp(App);
-
-app.use(VueGtag, {property: {id: "UA-206254002-3"}});
-app.use(router);
-app.component("FontAwesome", FontAwesomeIcon)
-app.mount("#app");
-
-// createApp(App)
-//     .use(VueGtag, {config: { id: "UA-206254002-3" }})
-//     .use(router)
-//     .component("FontAwesome", FontAwesomeIcon)
-//     .mount('#app');
+createApp(App)
+    .use(VueGtag, {property: {
+        id: "UA-206254002-3" ,
+        params: {
+            user_id: "206254002",
+            send_page_view: false,
+            linker: {
+                domain: ['https://my-game-list-front.vercel.app/']
+            }
+        }
+    }})
+    .use(router)
+    .component("FontAwesome", FontAwesomeIcon)
+    .mount('#app');
