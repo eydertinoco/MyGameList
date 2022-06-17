@@ -5,7 +5,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import App from './App.vue'
 import router from './router'
-import VueGtag from "vue-gtag"
+import VueGtag from "vue-gtag-next"
 
 library.add(fas, fab);
 
