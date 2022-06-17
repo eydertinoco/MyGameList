@@ -3,13 +3,23 @@
     <div class="home__intro">
       <img src="../../public/img/Controle.png" alt="Controle" class="home__intro__img">
       <div class="home__intro__text">
-        <h2>Encontre os jogos mais jogados e apoie seu jogo favorito.</h2>
-        <p>Achou algo novo? Crie um tópico sobre isso! Faça com que outros jogadores vivam o mesmo.</p>
+        <h2>Quer encontrar os jogos mais jogados?</h2>
+        <h2>Quer conversar com uma comunidade ativa?</h2>
+        <p>Entre no My game List e faça com que outros jogadores vivam o mesmo.</p>
       </div>
     </div>
+    <div class="home__intro" style="flex-direction: column;">
+      <div class="home__intro__text" style="padding-bottom: 0;">
+        <h2>Escolha seu jogo, avalie, crie tópicos e faça a comunidade crescer.</h2>
+      </div>
+      <img src="https://thumbs.dreamstime.com/b/grupo-de-pessoas-multi-tnico-sociedade-retrato-multicultural-da-comunidade-e-cidad%C3%A3os-povos-dos-jovens-do-adulto-pessoa-idosa-153736278.jpg"
+           alt="Controle" class="home__intro__img" style="margin-top: 0; width: 100%;">
+    </div>
+
     <div class="home__bestGame">
 
     </div>
+
     <div class="home__games">
       <div class="home__games__content">
         <!--
