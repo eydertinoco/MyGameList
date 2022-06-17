@@ -4,7 +4,7 @@
     <div class="header__menu">
       <router-link to="/cadastrarTopicos">Reviews</router-link>
       <router-link to="/">About Us</router-link>
-      <router-link to="/">News</router-link>
+      <router-link to="/ladingPage">News</router-link>
     </div>
     <div class="header__login">
       <div v-if="isLogged.logged" id="logged">

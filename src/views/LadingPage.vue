@@ -3,52 +3,33 @@
     <div class="home__intro">
       <img src="../../public/img/Controle.png" alt="Controle" class="home__intro__img">
       <div class="home__intro__text">
-        <h2>Quer encontrar os jogos mais jogados? e apoie seu jogo favorito.</h2>
-        <p>Achou algo novo? Crie um tópico sobre isso! Faça com que outros jogadores vivam o mesmo.</p>
+        <h2>Quer encontrar os jogos mais jogados?</h2>
+        <h2>Quer conversar com uma comunidade ativa?</h2>
+        <p>Entre no My game List e faça com que outros jogadores vivam o mesmo.</p>
       </div>
     </div>
+    <div class="home__intro" style="flex-direction: column;">
+      <div class="home__intro__text" style="padding-bottom: 0;">
+        <h2>Escolha seu jogo, avalie, crie tópicos e faça a comunidade crescer.</h2>
+      </div>
+      <img src="https://thumbs.dreamstime.com/b/grupo-de-pessoas-multi-tnico-sociedade-retrato-multicultural-da-comunidade-e-cidad%C3%A3os-povos-dos-jovens-do-adulto-pessoa-idosa-153736278.jpg"
+           alt="Controle" class="home__intro__img" style="margin-top: 0; width: 100%;">
+    </div>
+
     <div class="home__bestGame">
 
     </div>
-    <div class="home__games">
-      <div class="home__games__content">
-        <!--
-        <h2>Seja o primeiro a avaliar</h2>
-        <div class="home__games__avaliar">
 
-        </div>
-        -->
-        <h2>Todos os jogos</h2>
-        <div class="home__games__all">
-          <CardGame v-for="game in games" :key="game.id" :id="game.id" :thumbnail="game.thumbnail" :slug="game.slug"/>
-        </div>
-      </div>
+    <div>
+      <h2>Adicione seu email para receber novidades sobre o Projeto</h2>
     </div>
 
   </div>
 </template>
 
 <script>
-import CardGame from '@/components/CardGame.vue'
-import { server } from '../services/config';
 export default {
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: "Home",
-    data() {
-        return {
-          games: [],
-        };
-    },
-    components: { CardGame },
-    methods: {
-      async findGames() {
-        const result = await server.get('/games');
-        this.games = result.data;
-      }
-    },
-    beforeMount() {
-      this.findGames();
-    }
+  name: "LadingPage"
 }
 </script>
 
