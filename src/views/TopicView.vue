@@ -27,7 +27,20 @@
 
     <hr/>
 
-    <CardComentario/>
+    <div class="cardComentario">
+      <div class="cardComentario__header">
+
+        <div class="userinfo">
+          <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
+          <p> usuário </p>
+        </div>
+
+        <p> Data </p>
+      </div>
+
+      <p> Comentário </p>
+
+    </div>
 
     <hr/>
 
@@ -45,7 +58,6 @@
 import Editor from '@tinymce/tinymce-vue';
 import { useCookies } from 'vue3-cookies';
 import CardTopico from "@/components/CardTopico";
-import CardComentario from "@/components/CardComentario";
 
 
 export default {
@@ -67,7 +79,6 @@ export default {
     // eslint-disable-next-line vue/no-unused-components
     'editor': Editor,
     CardTopico,
-    CardComentario,
   },
 }
 </script>
@@ -105,6 +116,52 @@ export default {
       }
     }
   }
+
+  .cardComentario {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $cinzaEscuro;
+    margin: 0 auto;
+    @include for-desktop-only() {
+      width: 960px;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: flex-start;
+      margin: 5px 0px;
+      padding: 0 10px;
+      & .userinfo {
+        display: flex;
+        & img {
+          border-radius: 30px;
+          height: 50px;
+          width: 50px;
+        }
+        & p {
+          font-size: 24px !important;
+          margin: 0 10px;
+          font-weight: 700;
+        }
+      }
+
+      & p {
+        font-size: 16px !important;
+      }
+    }
+
+    & p {
+      font-size: 24px;
+      color: $cinzaEscuro;
+      transition: 0.5s;
+      margin: 0 10px 5px;
+      text-align: justify;
+    }
+  }
+
   .comentarTopico {
     align-items: center;
     justify-content: center;
