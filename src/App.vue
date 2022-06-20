@@ -4,6 +4,7 @@
     <router-view/>
   </div>
   <Footer/>
+  <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
 </template>
 
 <script>
@@ -15,6 +16,14 @@ export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      adsenseContent: '',
+    }
+  },
+  mounted() {
+    this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
   }
 }
 </script>
