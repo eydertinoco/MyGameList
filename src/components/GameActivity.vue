@@ -9,7 +9,6 @@
         </router-link>
       </div>
 
-      <p>gameId</p>
 
       <div class="gameActivity__menu">
         <button @click="tabList === true">Tópicos</button>
@@ -27,13 +26,14 @@
 
 <script>
 import CardTopico from "@/components/CardTopico";
-import {server} from "@/services/config";
 
 export default {
   name: "GameActivity",
   components: {CardTopico},
   props: {
     gameId: String,
+    topics: String,
+    gameSlug: String,
   },
   data() {
     return {
@@ -43,21 +43,21 @@ export default {
       dataAvaliacao: '',
       descricaoAvaliacao: 'Esse jogo é foda!',
       gameuri: `/cadastrarTopicos/${this.gameSlug}`,
-      topics: [],
     }
   },
   updated() {
     this.gameuri = `/cadastrarTopicos/${this.gameSlug}`;
   },
-  methods: {
-    async findTopics() {
-      const result = await server.get(`/topics/game/${this.gameId}`);
-      this.topics = result.data;
-    },
-  },
-  beforeMount() {
-    this.findTopics();
-  }
+  // methods: {
+  //   async findTopics() {
+  //     const result = await server.get(`/topics`);
+  //     this.topics = result.data;
+  //     console.log(this.topics);
+  //   },
+  // },
+  // async beforeMount() {
+  //   await this.findTopics();
+  // }
 }
 
 </script>

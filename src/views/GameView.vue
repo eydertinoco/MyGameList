@@ -72,7 +72,7 @@
       </div>
     </div>
     <hr>
-    <GameActivity :gameSlug="this.game.slug" :gameId="this.game.id"/>
+    <GameActivity :gameSlug="this.game.slug" :gameId="this.game.id" :topics="this.topics"/>
   </div>
 </template>
 
@@ -98,6 +98,7 @@ export default {
       rate: true,
       comment: '',
       hasReview: -1,
+      topics: [],
     }
   },
   methods: {
@@ -151,12 +152,17 @@ export default {
           this.hasReview = this.rate ? 1 : 0;
         }
       }
-    }
+    },
+    async findTopics() {
+      const result = await server.get(`/topics/game/${this.game.id}`);
+      this.topics = result.data;
+      console.log(this.topics);
+    },
   },
   async beforeMount() {
     window.scroll(0, 0);
     await this.getGame();
-
+    await this.findTopics();
     let token = this.cookies.get('token-session');
     if (token) this.isLogged = true;
 
