@@ -2,9 +2,10 @@
   <div class="header">
     <router-link to="/" class="header__logo">MyGameList</router-link>
     <div class="header__menu">
-      <router-link to="/cadastrarTopicos">Reviews</router-link>
-      <router-link to="/">About Us</router-link>
-      <router-link to="/ladingPage">News</router-link>
+<!--      <router-link to="/cadastrarTopicos">Reviews</router-link>-->
+<!--      <router-link to="/">About Us</router-link>-->
+      <router-link to="/">Home</router-link>
+      <a href="https://mygamelist-landingpage.vercel.app/">Lading Page</a>
     </div>
     <div class="header__login">
       <div v-if="isLogged.logged" id="logged">
