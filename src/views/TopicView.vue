@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="wrapper">
 
-    <div class="headerTopico">
+    <header class="headerTopico">
       <a>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.172 6.778L6.808 1.414L8.222 0L16 7.778L8.222 15.556L6.808 14.142L12.172 8.778H0V6.778H12.172Z" fill="#F14668"/>
@@ -11,80 +11,91 @@
 
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-          <li><a href="#">Jogo</a></li>
-          <li><a href="#">Nome do Jogo</a></li>
-          <li><a href="#">Tópico</a></li>
-          <li class="is-active"><a href="#" aria-current="page">Nome do Tópico</a></li>
+          <li><a v-bind:href="`/games/`+ this.game.slug">{{this.game.title}}</a></li>
+          <li><a href="#">{{this.title}}</a></li>
         </ul>
       </nav>
-    </div>
-
-    <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
-
-    <div style="max-width: 960px; margin: 0 auto;">
-      <editor v-model="conteudo"/>
-    </div>
-
-    <hr/>
-
-    <div class="cardComentario">
-      <div class="cardComentario__header">
-
-        <div class="userinfo">
-          <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
-          <p> usuário </p>
-        </div>
-
-        <p> Data </p>
+    </header>
+    <section class="user-info-container">
+      <div class="user-info">
+        <h2>{{this.user.nickname}}</h2>
+        <p>publicado em: {{formatDate(this.topic.created_at)}}</p>
       </div>
-
-      <p> Comentário </p>
-
-    </div>
-
-    <hr/>
-
-    <div class="comentarTopico">
-      <textarea v-model="message" class="comentarTopico__text"
-                placeholder="Comente sobre o tópico aqui."></textarea>
-
-      <button type="submit" class="comentarTopico__btn">Publicar</button>
-    </div>
-
+    </section>
+    <div class="divider"></div>
+    <section class="content-container">
+      <h1 class="topic-title">{{this.topic.title}}</h1>
+      <div v-html="topic.content" class="content">
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 import Editor from '@tinymce/tinymce-vue';
-import { useCookies } from 'vue3-cookies';
-import CardTopico from "@/components/CardTopico";
-
+import { server } from '../services/config';
+import moment from 'moment';
 
 export default {
   name: "TopicView",
-  setup() {
-    const { cookies } = useCookies();
-    return { cookies };
-  },
   data() {
     return {
       title: '',
       description: '',
       content: '',
+      topic: {},
+      user: {},
       game: {},
-      created: true,
     }
   },
   components: {
     // eslint-disable-next-line vue/no-unused-components
     'editor': Editor,
-    CardTopico,
+  },
+  methods: {
+    async getTopic() {
+      const topicID = document.location.pathname.split('/')[2];
+      const result = await server.get('/topics/' + topicID);
+      this.topic = result.data;
+
+      if ( this.topic ) {
+        this.title = this.topic.title;
+        this.description = this.topic.description;
+        this.content = this.topic.content;
+        this.user = this.topic.user;
+        this.game = this.topic.game;
+      }
+    },
+    formatDate(date) {
+      moment.locale('pt-br');
+      return moment(date).format('L');
+    },
+  },
+  async beforeMount() {
+    await this.getTopic();
   },
 }
 </script>
 
 <style scoped lang="scss">
   @import "src/assets/style/mixins";
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    margin: 1rem 0;
+  }
+
+  .divider {
+    height: 1px;
+    width: 100%;
+    max-width: 960px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
 
   .breadcrumb {
     margin: auto 10px;
@@ -117,74 +128,35 @@ export default {
     }
   }
 
-  .cardComentario {
-    justify-content: center;
+  .content-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid $cinzaEscuro;
-    margin: 0 auto;
-    @include for-desktop-only() {
-      width: 960px;
-    }
-
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      align-items: flex-start;
-      margin: 5px 0px;
-      padding: 0 10px;
-      & .userinfo {
-        display: flex;
-        & img {
-          border-radius: 30px;
-          height: 50px;
-          width: 50px;
-        }
-        & p {
-          font-size: 24px !important;
-          margin: 0 10px;
-          font-weight: 700;
-        }
-      }
-
-      & p {
-        font-size: 16px !important;
-      }
-    }
-
-    & p {
-      font-size: 24px;
-      color: $cinzaEscuro;
-      transition: 0.5s;
-      margin: 0 10px 5px;
-      text-align: justify;
-    }
-  }
-
-  .comentarTopico {
     align-items: center;
     justify-content: center;
+  }
+  .content {
+    width: 100%;
+    max-width: 960px;
+    padding: 1rem 1.5rem;
+    border-left: 2px solid rgba(12, 159, 189, 0.15);
+    border-right: 2px solid rgba(12, 159, 189, 0.15);
+  }
+  .user-info-container {
+    width: 100%;
+    max-width: 960px;
     display: flex;
     flex-direction: column;
-    @include for-desktop-only() {
-      width: 960px;
-      margin: 0 auto;
-    }
-    &__text {
-      height: 200px;
-      font-size: 18px;
-      width: 100%;
-    }
-    &__btn {
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 24px;
-      font-weight: 600;
-      background: #48C78E;
-      padding: 10px 20px;
-      margin: 25px 0;
-    }
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.2rem;
+  }
+
+  .topic-title {
+    font-size: 3rem;
+    font-weight: 500;
+  }
+  .user-info h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 </style>
