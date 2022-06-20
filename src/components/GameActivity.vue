@@ -9,13 +9,15 @@
         </router-link>
       </div>
 
+      <p>gameId</p>
+
       <div class="gameActivity__menu">
         <button @click="tabList === true">Tópicos</button>
         <button @click="tabList === false">Avaliações</button>
       </div>
 
       <div v-if="tabList === true">
-        <CardTopico v-for="topic in topics" :key="topic.id" :id="topic.id" :game="topic.game_id" :topicTitle="topic.title"/>
+        <CardTopico v-for="topic in topics" :key="topic.id" :id="topic.id" :topicTitle="topic.title"/>
       </div>
 
     </form>
@@ -31,7 +33,7 @@ export default {
   name: "GameActivity",
   components: {CardTopico},
   props: {
-    gameSlug: String,
+    gameId: String,
   },
   data() {
     return {
@@ -49,9 +51,9 @@ export default {
   },
   methods: {
     async findTopics() {
-      const result = await server.get(`/topics/`);
+      const result = await server.get(`/topics/game/${this.gameId}`);
       this.topics = result.data;
-    }
+    },
   },
   beforeMount() {
     this.findTopics();

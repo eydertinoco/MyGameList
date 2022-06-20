@@ -18,7 +18,6 @@
 export default {
   name: "CardTopico",
   props: {
-    game: String,
     id: String,
     topicTitle: String,
     // createrName: String,

@@ -72,7 +72,7 @@
       </div>
     </div>
     <hr>
-    <GameActivity :gameSlug="this.game.slug"/>
+    <GameActivity :gameSlug="this.game.slug" :gameId="this.game.id"/>
   </div>
 </template>
 
