@@ -29,7 +29,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue')
     },
     {
-        path: '/topicview',
+        path: '/topics/:topic_id',
         name: 'TopicView',
         component: () => import(/* webpackChunkName: "about" */ '../views/TopicView.vue')
     },
