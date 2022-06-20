@@ -15,14 +15,7 @@
       </div>
 
       <div v-if="tabList === true">
-        <router-link to="/topicView">
-          <CardTopico tituloTopico="Titulo do Tópico" nomeCriador="Eyder" dataCriacao="29/05/2022"/>
-        </router-link>
-      </div>
-
-      <div v-else>
-        <CardAvaliacao notaAvaliacao="{{ GameView.rate }}" nomeCriador="{{ userName }}" dataAvaliacao="{{ dataAvaliacao }}"
-                       descricaoAvaliacao="{{ descricaoAvaliacao }}"/>
+        <CardTopico v-for="topic in topics" :key="topic.id" :id="topic.id" :game="topic.game_id" :topicTitle="topic.title"/>
       </div>
 
     </form>
@@ -32,11 +25,11 @@
 
 <script>
 import CardTopico from "@/components/CardTopico";
-import CardAvaliacao from "@/components/CardAvaliacao";
+import {server} from "@/services/config";
 
 export default {
   name: "GameActivity",
-  components: {CardAvaliacao, CardTopico},
+  components: {CardTopico},
   props: {
     gameSlug: String,
   },
@@ -47,11 +40,21 @@ export default {
       userName: '',
       dataAvaliacao: '',
       descricaoAvaliacao: 'Esse jogo é foda!',
-      gameuri: `/cadastrarTopicos/${this.gameSlug}`
+      gameuri: `/cadastrarTopicos/${this.gameSlug}`,
+      topics: [],
     }
   },
   updated() {
     this.gameuri = `/cadastrarTopicos/${this.gameSlug}`;
+  },
+  methods: {
+    async findTopics() {
+      const result = await server.get(`/topics/`);
+      this.topics = result.data;
+    }
+  },
+  beforeMount() {
+    this.findTopics();
   }
 }
 

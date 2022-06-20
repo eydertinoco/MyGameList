@@ -1,32 +1,32 @@
 <template>
-  <div class="cardTopico">
-    <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
-    <div class="cardTopico__text">
-      <h4>{{ tituloTopico }}</h4>
-      <div class="cardTopico__userInfo">
-        <p>{{ nomeCriador }}</p>
-        <p class="cardTopico__userInfo__separador">-</p>
-        <p>{{ dataAtualizada }}</p>
+  <router-link :to="getURI()">
+    <div class="cardTopico">
+      <img src="https://icon-library.com/images/batman-icon-png/batman-icon-png-10.jpg" alt="avatar">
+      <div class="cardTopico__text">
+        <h4>{{ topicTitle }}</h4>
+<!--        <div class="cardTopico__userInfo">-->
+<!--          <p>{{ createrName }}</p>-->
+<!--          <p class="cardTopico__userInfo__separador">-</p>-->
+<!--          <p>{{ newDate }}</p>-->
+<!--        </div>-->
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
   name: "CardTopico",
   props: {
-    tituloTopico: {
-      type: String,
-      default: () => "Titulo",
-    },
-    nomeCriador: {
-      type: String,
-      default: () => "Desconhecido",
-    },
-    dataAtualizada: {
-      type: Date,
-      default: () => "01/01/1900",
+    game: String,
+    id: String,
+    topicTitle: String,
+    // createrName: String,
+    // newDate: Date,
+  },
+  methods: {
+    getURI() {
+      return `/topics/${this.id}/`;
     }
   }
 }
