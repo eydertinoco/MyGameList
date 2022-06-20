@@ -31,7 +31,7 @@
             <span v-if="hasReview === 1" class="good">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 9h3v12H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zm5.293-1.293l6.4-6.4a.5.5 0 0 1 .654-.047l.853.64a1.5 1.5 0 0 1 .553 1.57L14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H8a1 1 0 0 1-1-1V8.414a1 1 0 0 1 .293-.707z"/></svg>
             </span>
-              <span v-if="hasReview === 0" class="bad">
+              <span v-else-if="hasReview === 0" class="bad">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22 15h-3V3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zm-5.293 1.293l-6.4 6.4a.5.5 0 0 1-.654.047L8.8 22.1a1.5 1.5 0 0 1-.553-1.57L9.4 16H3a2 2 0 0 1-2-2v-2.104a2 2 0 0 1 .15-.762L4.246 3.62A1 1 0 0 1 5.17 3H16a1 1 0 0 1 1 1v11.586a1 1 0 0 1-.293.707z"/></svg>
             </span>
             </div>
@@ -42,15 +42,15 @@
         <h1 class="info__title">Informations</h1>
         <div class="info__data">
           <div class="info__data__item">
-            <strong>Release Date</strong>
+            <strong>Data de Publicação</strong>
             <span>{{ formatDate(game.release_date) }}</span>
           </div>
           <div class="info__data__item">
-            <strong>Developer</strong>
+            <strong>Desenvolvedora</strong>
             <span>{{ game.developer }}</span>
           </div>
           <div class="info__data__item">
-            <strong>Publisher</strong>
+            <strong>Publicadora</strong>
             <span>{{ game.publisher }}</span>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default {
       const result = await server.get(`/reviews/game/${this.game.id}`, config);
       
       if (result.data) {
-        this.hasReview = result.data.rate ? 1 : 0;
+        this.hasReview = result.data[0].rate ? 1 : 0;
       }
     }
   }
